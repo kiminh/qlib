@@ -7,16 +7,25 @@ Estimator: Workflow Management
 Introduction
 ===================
 
+The components in :ref:`framework` is designed in a loosely-coupled way. User could build his own Quant research workflow with these components like `Example <http://TODO_URL>`_
+
+Besides, ``Qlib`` provides more user-friendly interface named ``Estimator`` to automatically run the whole workflow defined by a config.
+The automatic workflow includes the the following process:
+
 By ``Estimator``, user can start an 'experiment', which has the following process:
 
-- Data loading
-- Data processing
-- Data slicing
-- Model static training, rolling training
-- Model saving & loading
-- Back testing
+- Data
+  - Loading
+  - Processing
+  - Slicing
+- Model
+  - Training and inference(static or rolling)
+  - Saving & loading
+- Evaluation(Back-testing)
 
-Qlib will capture the standard input and output, and backtest performance files of this experiment, and identifiers such as names are stored on disk or on a database.
+A concrete execution of the whole workflow is called an experiment.
+
+For each experiment, Qlib will capture the details of model training, performance evalution results and basic infomation(e.g. names, ids). The captured data will be stored in backend-storge(disk or database).
 
 Example
 ===================
