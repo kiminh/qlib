@@ -142,7 +142,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
         -->
 
 ## Customized Quant research workflow by code
-Automatical workflow may not suite the research workflow of all Quant researchers. To support flexible Quant research workflow, Qlib also provide modulized interface to allow researchers to build their own workflow. [Here](TODO_URL) is a demo for customized Quant research workflow by code
+Automatic workflow may not suite the research workflow of all Quant researchers. To support flexible Quant research workflow, Qlib also provide modulized interface to allow researchers to build their own workflow. [Here](TODO_URL) is a demo for customized Quant research workflow by code
 
 
 
