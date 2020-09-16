@@ -12,6 +12,7 @@ With you Qlib, you can easily apply your favorite model to create better Quant i
 - [More About Qlib](#more-about-qlib)
   - [Offline mode and online mode](#offline-mode-and-online-mode)
   - [Performance of Qlib Data Server](#performance-of-qlib-data-server)
+- [Contributing](#contributing)
 
 
 
@@ -171,11 +172,15 @@ Under online mode, the data will be deployed as a shared data service. The data 
 The performance of data processing is important to datadriven methods like AI technologies. As an AI-oriented platform, Qlib provides a solution for data storage and data processing. To demonstrate the performance of Qlib, We
 compare Qlib with several other solutions. 
 
-The task for the solutions is to create a dataset from the
-basic OHLCV daily data of a stock market, which involves
-data query and processing.
+We evaluate the performance of several solutions by completing the same task,
+which create a dataset(14 features/factors) from the basic OHLCV daily data of a stock market(800 stocks each day from 2007 to 2020). The task involves data query and processing.
 
-
+| | HDF5|MySQL|MongoDB|InfluxDB|Qlib -E -D|Qlib +E -D|Qlib +E +D |
+|--|--|--|--|--|---|--|--|--|--|--|
+| Total (1CPU) (seconds)|184.4±3.7|365.3±7.5|253.6±6.7|368.2±3.6|147.0±8.8|47.6±1.0|**7.4±0.3**|
+| Total (64CPU) (seconds)||||| **8.8±0.6** |4.2±0.2||
+* `+(-)E` indicates with(out) `ExpressionCache`
+* `+(-)D` indicates with(out) `DatasetCache`
 
 Most general purpose databases take too much time on loading data. After looking into the underlying implementation, we find that data go through too many layers of interfaces and unnecessary format transformations in general purpose database solution.
 Such overheads greatly slow down the data loading process.
