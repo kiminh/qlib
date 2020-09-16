@@ -1,3 +1,4 @@
+
 ===================
 Qlib
 ===================
@@ -9,6 +10,8 @@ Introduction
 
 With ``Qlib``, you can easily apply your favorite model to create better Quant investment strategy.
 
+
+.. _framework:
 
 Framework
 ==================

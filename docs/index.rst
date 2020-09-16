@@ -35,11 +35,11 @@ Document Structure
    :caption: ADVANCED FEATURES:
 
    Estimator: Workflow Management <advanced/estimator.rst>
-   Data: Data Framework&Usage <advanced/data.rst>
-   Model: Train&Predict <advanced/model.rst>
-   Strategy: Portfolio Management <advanced/strategy.rst>
-   Backtest: Model&Strategy Testing <advanced/backtest.rst>
-   Report: Graphical Results <advanced/report.rst>
+   Data Layer: Data Framework&Usage <advanced/data.rst>
+   Interday Model: Train&Predict <advanced/model.rst>
+   Interday Strategy: Portfolio Management <advanced/strategy.rst>
+   Intraday Trading: Model&Strategy Testing <advanced/backtest.rst>
+   Aanalysis: Evaluation & Results Analysis <advanced/report.rst>
    Cache: Frequently-Used Data <advanced/cache.rst>
 
 
