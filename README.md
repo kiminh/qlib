@@ -178,7 +178,7 @@ which create a dataset(14 features/factors) from the basic OHLCV daily data of a
 |  | HDF5 | MySQL | MongoDB | InfluxDB | Qlib -E -D | Qlib +E -D | Qlib +E +D |
 |--|------| ------| --------| ---------| -----------|------------| -----------|
 | Total (1CPU) (seconds) |184.4±3.7|365.3±7.5|253.6±6.7|368.2±3.6|147.0±8.8|47.6±1.0|**7.4±0.3**|
-| Total (64CPU) (seconds)||||| **8.8±0.6** |4.2±0.2||
+| Total (64CPU) (seconds)||||| 8.8±0.6 | **4.2±0.2** ||
 * `+(-)E` indicates with(out) `ExpressionCache`
 * `+(-)D` indicates with(out) `DatasetCache`
 
