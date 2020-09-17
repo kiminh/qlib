@@ -32,16 +32,21 @@ Document Structure
 
 .. toctree::
    :maxdepth: 3
-   :caption: ADVANCED FEATURES:
+   :caption: COMPONENT:
 
-   Estimator: Workflow Management <advanced/estimator.rst>
-   Data Layer: Data Framework&Usage <advanced/data.rst>
-   Interday Model: Train&Predict <advanced/model.rst>
-   Interday Strategy: Portfolio Management <advanced/strategy.rst>
-   Intraday Trading: Model&Strategy Testing <advanced/backtest.rst>
-   Aanalysis: Evaluation & Results Analysis <advanced/report.rst>
-   Cache: Frequently-Used Data <advanced/cache.rst>
+   Estimator: Workflow Management <component/estimator.rst>
+   Data Layer: Data Framework&Usage <component/data.rst>
+   Interday Model: Train&Predict <component/model.rst>
+   Interday Strategy: Portfolio Management <component/strategy.rst>
+   Intraday Trading: Model&Strategy Testing <component/backtest.rst>
+   Aanalysis: Evaluation & Results Analysis <component/report.rst>
+   Cache: Frequently-Used Data <component/cache.rst>
 
+.. toctree::
+   :maxdepth: 3
+   :caption: ADVANCED TOPICS:
+   
+   Building Formulaic Alphas <advanced/alpha.rst>
 
 .. toctree::
    :maxdepth: 3

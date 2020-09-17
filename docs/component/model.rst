@@ -176,4 +176,4 @@ Qlib supports custom models, how to customize the model and integrate the model 
 
 Api
 ===================
-Please refer to `Model Api <../reference/api.html#module-qlib.contrib.model.base>`_ for Model Api.
+Please refer to `Model Api <../reference/api.html#module-qlib.contrib.model.base>`_.
