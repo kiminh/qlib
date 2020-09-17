@@ -13,12 +13,10 @@ Users can get stock data by Qlib, the following are some examples.
 Examples
 ====================
 
-Init qlib package:
 
-.. note:: In order to get the data, users need to initialize package qlib with qlib.init first.
+``QLib`` Initialization:
 
-Please refer to `initialization <initialization.rst>`_
-
+.. note:: In order to get the data, users need to initialize package qlib with qlib.init first. Please refer to `initialization <initialization.rst>`_.
 
 It is recommended to use the following code to initialize qlib:
 
@@ -87,22 +85,22 @@ Load features of certain instruments in given time range:
    >>> instruments = ['SH600000']
    >>> fields = ['$close', '$volume', 'Ref($close, 1)', 'Mean($close, 3)', '$high-$low']
    >>> D.features(instruments, fields, start_time='2010-01-01', end_time='2017-12-31', freq='day').head()
-		             $close     $volume  Ref($close,1)  Mean($close,3)  \
-   instrument datetime
-   SH600000   2010-01-04  81.809998  17144536.0            NaN       81.809998
-	      2010-01-05  82.419998  29827816.0      81.809998       82.114998
-              2010-01-06  80.800003  25070040.0      82.419998       81.676666
-              2010-01-07  78.989998  22077858.0      80.800003       80.736666
-              2010-01-08  79.879997  17019168.0      78.989998       79.889999
+		                     $close      $volume      Ref($close,1)   Mean($close,3)  \
+   instrument  datetime
+   SH600000    2010-01-04  81.809998   17144536.0         NaN       81.809998
+	            2010-01-05  82.419998   29827816.0   81.809998       82.114998
+               2010-01-06  80.800003   25070040.0   82.419998       81.676666
+               2010-01-07  78.989998   22077858.0   80.800003       80.736666
+               2010-01-08  79.879997   17019168.0   78.989998       79.889999
 
                            Sub($high,$low)
-   instrument datetime
-   SH600000   2010-01-04         2.741158
-	      2010-01-05         3.049736
-              2010-01-06         1.621399
-              2010-01-07         2.856926
-              2010-01-08         1.930397
-              2010-01-08         1.930397
+   instrument  datetime
+   SH600000    2010-01-04  2.741158
+	            2010-01-05  3.049736
+               2010-01-06  1.621399
+               2010-01-07  2.856926
+               2010-01-08  1.930397
+               2010-01-08  1.930397
 
 Load features of certain stockpool in given time range:
 
