@@ -1,6 +1,6 @@
-Qlib is a an AI-oriented quantitative investment platform.  aims to realize the potential, empower the research, and create the value of AI technologies in quantitative investment.
+Qlib is an AI-oriented quantitative investment platform, which aims to realize the potential, empower the research, and create the value of AI technologies in quantitative investment.
 
-With you Qlib, you can easily apply your favorite model to create better Quant investment strategy.
+With Qlib, you can easily apply your favorite model to create a better Quant investment strategy.
 
 
 - [Framework of Qlib](#framework-of-qlib)
@@ -19,7 +19,7 @@ With you Qlib, you can easily apply your favorite model to create better Quant i
 # Framework of Qlib
 ![framework](docs/_static/img/framework.png)
 
-At module level, Qlib is a platform that consists of the above components. Each components is loose-coupling and can be used stand-alone.
+At the module level, Qlib is a platform that consists of the above components. Each component is loose-coupling and can be used stand-alone.
 
 | Name | Description|
 |------| -----|
@@ -93,21 +93,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
     Estimator result:
   
     ```bash
-    pred_long       mean    0.001386
-                    std     0.004403
-                    annual  0.349379
-                    sharpe  4.998428
-                    mdd    -0.049486
-    pred_short      mean    0.002703
-                    std     0.004680
-                    annual  0.681071
-                    sharpe  9.166842
-                    mdd    -0.053523
-    pred_long_short mean    0.004089
-                    std     0.007028
-                    annual  1.030451
-                    sharpe  9.236475
-                    mdd    -0.045817
+
     sub_bench       mean    0.000953
                     std     0.004688
                     annual  0.240123
@@ -162,18 +148,18 @@ You can also view the [latest document](TODO_URL) online directly.
 
 
 ## Offline mode and online mode
-The data server of Qlib can both deployed as offline mode and online mode. The default  mode is offline mode.
+The data server of Qlib can both deployed as offline mode and online mode. The default mode is offline mode.
 
 Under offline mode, the data will be deployed locally. 
 
-Under online mode, the data will be deployed as a shared data service. The data and their cache will be shared by clients. The data retrieving performance is expected to be improved due to higher rate of cache hits. It will use less disk space, too. The documents of the online mode can be found in [Qlib-Server](TODO_link). The online mode can be deployed automatically with [Azure CLI based scripts](TODO_link)
+Under online mode, the data will be deployed as a shared data service. The data and their cache will be shared by clients. The data retrieving performance is expected to be improved due to a higher rate of cache hits. It will use less disk space, too. The documents of the online mode can be found in [Qlib-Server](TODO_link). The online mode can be deployed automatically with [Azure CLI based scripts](TODO_link)
 
 ## Performance of Qlib Data Server
-The performance of data processing is important to datadriven methods like AI technologies. As an AI-oriented platform, Qlib provides a solution for data storage and data processing. To demonstrate the performance of Qlib, We
+The performance of data processing is important to data-driven methods like AI technologies. As an AI-oriented platform, Qlib provides a solution for data storage and data processing. To demonstrate the performance of Qlib, We
 compare Qlib with several other solutions. 
 
 We evaluate the performance of several solutions by completing the same task,
-which create a dataset(14 features/factors) from the basic OHLCV daily data of a stock market(800 stocks each day from 2007 to 2020). The task involves data query and processing.
+which creates a dataset(14 features/factors) from the basic OHLCV daily data of a stock market(800 stocks each day from 2007 to 2020). The task involves data queries and processing.
 
 |  | HDF5 | MySQL | MongoDB | InfluxDB | Qlib -E -D | Qlib +E -D | Qlib +E +D |
 |--|------| ------| --------| ---------| -----------|------------| -----------|
@@ -182,7 +168,7 @@ which create a dataset(14 features/factors) from the basic OHLCV daily data of a
 * `+(-)E` indicates with(out) `ExpressionCache`
 * `+(-)D` indicates with(out) `DatasetCache`
 
-Most general purpose databases take too much time on loading data. After looking into the underlying implementation, we find that data go through too many layers of interfaces and unnecessary format transformations in general purpose database solution.
+Most general-purpose databases take too much time on loading data. After looking into the underlying implementation, we find that data go through too many layers of interfaces and unnecessary format transformations in general-purpose database solutions.
 Such overheads greatly slow down the data loading process.
 Qlib data are stored in a compact format, which is efficient to be combined into arrays for scientific computation.
 
