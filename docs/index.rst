@@ -40,7 +40,6 @@ Document Structure
    Interday Strategy: Portfolio Management <component/strategy.rst>
    Intraday Trading: Model&Strategy Testing <component/backtest.rst>
    Aanalysis: Evaluation & Results Analysis <component/report.rst>
-   Cache: Frequently-Used Data <component/cache.rst>
 
 .. toctree::
    :maxdepth: 3
