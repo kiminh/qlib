@@ -2,7 +2,7 @@
 QLib Documentation
 ============================================================
 
-QLib is a Quantitative-research Library, which can provide research data with highly consistency, reusability and extensibility.
+Qlib is an AI-oriented quantitative investment platform, which aims to realize the potential, empower the research, and create the value of AI technologies in quantitative investment.
 
 .. _user_guide:
 
@@ -32,11 +32,11 @@ Document Structure
 
 .. toctree::
    :maxdepth: 3
-   :caption: COMPONENT:
+   :caption: COMPONENTS:
 
    Estimator: Workflow Management <component/estimator.rst>
    Data Layer: Data Framework&Usage <component/data.rst>
-   Interday Model: Train&Predict <component/model.rst>
+   Interday Model: Model Training & Prediction <component/model.rst>
    Interday Strategy: Portfolio Management <component/strategy.rst>
    Intraday Trading: Model&Strategy Testing <component/backtest.rst>
    Aanalysis: Evaluation & Results Analysis <component/report.rst>
@@ -51,7 +51,7 @@ Document Structure
    :maxdepth: 3
    :caption: REFERENCE:
 
-   Api <reference/api.rst>
+   API <reference/api.rst>
 
 .. toctree::
    :maxdepth: 3

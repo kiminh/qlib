@@ -137,4 +137,4 @@ Also, 'Model' can also be tested as a single module. An example has been given i
 Know More about 'Model'
 =====================
 
-If user want to know more about 'model', please refer to document `Use 'Model' to Train&Predict <../advanced/model.rst>`_ and api `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_.
+If user want to know more about 'model', please refer to document `Use 'Model' to Train&Predict <../advanced/model.rst>`_ and API `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_.
