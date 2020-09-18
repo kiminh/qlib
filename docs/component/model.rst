@@ -107,7 +107,7 @@ The base class provides the following interfaces:
             The form of ``w_test`` is same as ``w_train`` in 'fit' method.
     - Return: float type, evaluation score
 
-For other interfaces such as ``save``, ``load``, ``finetune``, please refer to `Model Api <../reference/api.html#module-qlib.contrib.model.base>`_.
+For other interfaces such as ``save``, ``load``, ``finetune``, please refer to `Model API <../reference/api.html#module-qlib.contrib.model.base>`_.
 
 Example
 ==================
@@ -159,7 +159,7 @@ Qlib provides LightGBM and DNN models as the baseline, the following example sho
         "num_threads": 20,
     }
     # use default model
-    # custom Model, refer to: TODO: Model api url
+    # custom Model, refer to: TODO: Model API url
     model = LGBModel(**MODEL_CONFIG)
     model.fit(x_train, y_train, x_validate, y_validate)
     _pred = model.predict(x_test)
@@ -174,6 +174,6 @@ Custom Model
 Qlib supports custom models, how to customize the model and integrate the model into Qlib, please refer to `How to integrate Model into Qlib <../start/integration.html>`_.
 
 
-Api
+API
 ===================
-Please refer to `Model Api <../reference/api.html#module-qlib.contrib.model.base>`_.
+Please refer to `Model API <../reference/api.html#module-qlib.contrib.model.base>`_.
