@@ -130,7 +130,7 @@ Example
     }
 
     # use default strategy
-    # custom Strategy, refer to: TODO: Strategy api url
+    # custom Strategy, refer to: TODO: Strategy API url
     strategy = TopkAmountStrategy(**STRATEGY_CONFIG)
     report_normal, positions_normal = backtest(
         pred_score, strategy=strategy, **BACKTEST_CONFIG
@@ -140,6 +140,6 @@ Also, the above example has been given in ``examples.estimator.train_backtest_an
 
 To know more about ``Backtest``, please refer to `Backtest: Model&Strategy Testing <backtest.html>`_.
 
-Api
+API
 ===================
-Please refer to `Strategy Api <../reference/api.html>`_.
+Please refer to `Strategy API <../reference/api.html>`_.

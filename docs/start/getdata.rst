@@ -8,7 +8,7 @@ Data Retrieval
 Introduction
 ====================
 
-Users can get stock data by Qlib, the following are some examples.
+Users can get stock data by Qlib. Following examples will demonstrate the basic user interface.
 
 Examples
 ====================
@@ -134,6 +134,6 @@ Load features of certain stockpool in given time range:
 
 .. note:: When calling D.features() at client, use parameter 'disk_cache=0' to skip dataset cache, use 'disk_cache=1' to generate and use dataset cache. In addition, when calling at server, you can use 'disk_cache=2' to update the dataset cache.
 
-Api
+API
 ====================
 To know more about how to use the Data, go to API Reference: `Data API <../reference/api.html#Data>`_

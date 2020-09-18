@@ -21,13 +21,13 @@ With Qlib, you can easily apply your favorite model to create a better Quant inv
 
 At the module level, Qlib is a platform that consists of the above components. Each component is loose-coupling and can be used stand-alone.
 
-| Name | Description|
-|------| -----|
-| _Data layer_ | _DataServer_ focus on providing high performance infrastructure  for user to retreive and get raw data. _DataEnhancement_ will preprocess the data and provide the best dataset to be fed in to the models  |
-| _Interday Model_ | _Interday model_ focus on produce forecasting signals(aka. _alpha_). Models are trained by _Model Creator_ and managed by _Model Manager_. User could choose one or multiple models for forecasting. Multiple models could be combined with _Ensemble_ module  |
-| _Interday Strategy_ | _Portfolio Generator_ will take forecasting signals as input and output the orders based on current position to achieve target portfolio  | 
-| _Intraday Trading_ | _Order Executor_ is responsible for executing orders output by _Interday Strategy_ and returning the executed results. |
-| _Analysis_ |  User could get detailed analysis report of forecasting signal and portfolio in this part. |
+| Name                | Description                                                                                                                                                                                                                                                   |
+| ------              | -----                                                                                                                                                                                                                                                         |
+| _Data layer_        | _DataServer_ focus on providing high performance infrastructure  for user to retrieve and get raw data. _DataEnhancement_ will preprocess the data and provide the best dataset to be fed in to the models                                                    |
+| _Interday Model_    | _Interday model_ focus on producing forecasting signals(aka. _alpha_). Models are trained by _Model Creator_ and managed by _Model Manager_. User could choose one or multiple models for forecasting. Multiple models could be combined with _Ensemble_ module |
+| _Interday Strategy_ | _Portfolio Generator_ will take forecasting signals as input and output the orders based on current position to achieve target portfolio                                                                                                                      |
+| _Intraday Trading_  | _Order Executor_ is responsible for executing orders output by _Interday Strategy_ and returning the executed results.                                                                                                                                        |
+| _Analysis_          | User could get detailed analysis report of forecasting signal and portfolio in this part.                                                                                                                                                                     |
 
 * The modules with hand-drawn style is under development and will be  released in the future.
 * The modules with dashed border is highly user-customizable and extendible.
@@ -40,7 +40,8 @@ At the module level, Qlib is a platform that consists of the above components. E
 To install Qlib from source you need _Cython_ in addition to the normal dependencies above:
 
 ```bash
-pip install cython
+pip install numpy
+pip install --upgrade  cython
 ```
 
 Clone the repository and then run:
@@ -129,7 +130,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
         -->
 
 ## Customized Quant research workflow by code
-Automatic workflow may not suite the research workflow of all Quant researchers. To support flexible Quant research workflow, Qlib also provide modulized interface to allow researchers to build their own workflow. [Here](TODO_URL) is a demo for customized Quant research workflow by code
+Automatic workflow may not suite the research workflow of all Quant researchers. To support flexible Quant research workflow, Qlib also provide modularized interface to allow researchers to build their own workflow. [Here](TODO_URL) is a demo for customized Quant research workflow by code
 
 
 
@@ -161,10 +162,10 @@ compare Qlib with several other solutions.
 We evaluate the performance of several solutions by completing the same task,
 which creates a dataset(14 features/factors) from the basic OHLCV daily data of a stock market(800 stocks each day from 2007 to 2020). The task involves data queries and processing.
 
-|  | HDF5 | MySQL | MongoDB | InfluxDB | Qlib -E -D | Qlib +E -D | Qlib +E +D |
-|--|------| ------| --------| ---------| -----------|------------| -----------|
-| Total (1CPU) (seconds) |184.4±3.7|365.3±7.5|253.6±6.7|368.2±3.6|147.0±8.8|47.6±1.0|**7.4±0.3**|
-| Total (64CPU) (seconds)||||| 8.8±0.6 | **4.2±0.2** ||
+|                         | HDF5      | MySQL     | MongoDB   | InfluxDB  | Qlib -E -D  | Qlib +E -D   | Qlib +E +D  |
+| --                      | ------    | ------    | --------  | --------- | ----------- | ------------ | ----------- |
+| Total (1CPU) (seconds)  | 184.4±3.7 | 365.3±7.5 | 253.6±6.7 | 368.2±3.6 | 147.0±8.8   | 47.6±1.0     | **7.4±0.3** |
+| Total (64CPU) (seconds) |           |           |           |           | 8.8±0.6     | **4.2±0.2**  |             |
 * `+(-)E` indicates with(out) `ExpressionCache`
 * `+(-)D` indicates with(out) `DatasetCache`
 

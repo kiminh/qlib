@@ -9,7 +9,7 @@ Introduction
 ``Qlib Data`` supports constructing data sets from raw data, and the ``Qlib Data`` framework includes three layers as follows.
 
 - Raw Data
-- Data Api
+- Data API
 - Data Handler
 
 
@@ -44,7 +44,7 @@ If users use ``Qlib`` in A-share mode, A-share data is required. The script'scri
         qlib.init(mount_path='~/.qlib/qlib_data/cn_data', region=REG_CN)
         
 
-Please refer to `Script Api <../reference/api.html>`_.
+Please refer to `Script API <../reference/api.html>`_.
 
 US Stock Mode
 -------------------------
@@ -75,9 +75,9 @@ If users use ``Qlib`` in US Stock mode, US stock data is required. Qlib does not
         qlib.init(mount_path='~/.qlib/qlib_data/us_data', region=REG_US)
         
 
-Please refer to `Script Api <../reference/api.html>`_ for more details.
+Please refer to `Script API <../reference/api.html>`_ for more details.
 
-Data Api
+Data API
 ========================
 
 Data Retrieval
@@ -98,7 +98,7 @@ Filter
     - `cross-sectional features filter` : rule_expression = '$rank($close)<10'
     - `time-sequence features filter`: rule_expression = '$Ref($close, 3)>100'
 
-To know more about ``Filter``, please refer to `Filter Api <../reference/api.html>`_.
+To know more about ``Filter``, please refer to `Filter API <../reference/api.html>`_.
 
 Feature
 ------------------
@@ -110,9 +110,9 @@ Feature
 
 - `ExpressionOps`
     `ExpressionOps` will use operator for feature construction.
-    To know more about  ``Operator``, please refer to `Operator Api <../reference/api.html>`_.
+    To know more about  ``Operator``, please refer to `Operator API <../reference/api.html>`_.
 
-To know more about  ``Feature``, please refer to `Feature Api <../reference/api.html>`_.
+To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
 
 
 
@@ -213,6 +213,6 @@ Qlib provides implemented data handler `QLibDataHandlerV1`. The following exampl
 
 Also, the above example has been given in ``examples.estimator.train_backtest_analyze.ipynb``.
 
-To know more abot 'Data Handler', please refer to `Data Handler Api <../reference/api.html#handler>`_.
+To know more abot 'Data Handler', please refer to `Data Handler API <../reference/api.html#handler>`_.
 
 
