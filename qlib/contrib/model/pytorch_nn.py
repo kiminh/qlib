@@ -167,7 +167,7 @@ class DNNModelPytorch(Model):
         # train
         self.logger.info("training...")
         self._fitted = True
-
+        #return
         # prepare training data
         x_train_values = torch.from_numpy(x_train.values).float()
         y_train_values = torch.from_numpy(y_train.values).float()
@@ -203,7 +203,6 @@ class DNNModelPytorch(Model):
 
             # forward
             preds = self.dnn_model(x_batch_cuda)
-
             cur_loss = self.get_loss(preds, w_batch_cuda, y_batch_cuda, self.loss_type)
             cur_loss.backward()
             self.train_optimizer.step()
@@ -211,6 +210,7 @@ class DNNModelPytorch(Model):
 
             # validation
             train_loss += loss.val
+            #print(loss.val)
             if step and step % self.eval_steps == 0:
                 stop_steps += 1
                 train_loss /= self.eval_steps
@@ -243,7 +243,7 @@ class DNNModelPytorch(Model):
                 # update learning rate
                 self.scheduler.step(cur_loss_val)
 
-        # restore the optimal parameters after training
+        # restore the optimal parameters after training ??
         self.dnn_model.load_state_dict(torch.load(save_path))
         torch.cuda.empty_cache()
 
@@ -263,7 +263,9 @@ class DNNModelPytorch(Model):
             raise ValueError("model is not fitted yet!")
         x_test = torch.from_numpy(x_test.values).float().cuda()
         self.dnn_model.eval()
-        preds = self.dnn_model(x_test).detach().cpu().numpy()
+        
+        with torch.no_grad():
+            preds = self.dnn_model(x_test).detach().cpu().numpy()
         return preds
 
     def score(self, x_test, y_test, w_test=None):
@@ -317,47 +319,38 @@ class Net(nn.Module):
     def __init__(self, input_dim, output_dim, layers=(256, 256, 256), loss="mse"):
         super(Net, self).__init__()
         layers = [input_dim] + list(layers)
-        self.hidden_layer_num = len(layers)
         dnn_layers = []
         drop_input = nn.Dropout(0.1)
         dnn_layers.append(drop_input)
         for i, (input_dim, hidden_units) in enumerate(zip(layers[:-1], layers[1:])):
             fc = nn.Linear(input_dim, hidden_units)
-            # drop = nn.Dropout(0.2)
-            # relu = nn.ReLU()
-            # activation = nn.Sigmoid()
-            activation = nn.Tanh()
+            activation = nn.ReLU()
             bn = nn.BatchNorm1d(hidden_units)
-            seq = nn.Sequential(fc, activation, bn)
+            drop = nn.Dropout(0.1)
+            seq = nn.Sequential(fc, bn, activation, drop)
             dnn_layers.append(seq)
-
-        drop_output = nn.Dropout(0.1)
-        dnn_layers.append(drop_output)
-        self.dnn_layers = nn.ModuleList(dnn_layers)
 
         if loss == "mse":
             fc = nn.Linear(hidden_units, output_dim)
-            self.output_layer = fc
+            dnn_layers.append(fc)
 
         elif loss == "binary":
             fc = nn.Linear(hidden_units, output_dim)
             sigmoid = nn.Sigmoid()
-            self.output_layer = nn.Sequential(fc, sigmoid)
+            dnn_layers.append(nn.Sequential(fc, sigmoid))
         else:
             raise NotImplementedError("loss {} is not supported!".format(loss))
         # optimizer
-
+        self.dnn_layers = nn.ModuleList(dnn_layers)
         self._weight_init()
 
     def _weight_init(self):
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                m.weight = nn.init.xavier_normal_(m.weight)
+                nn.init.xavier_normal_(m.weight, gain=1)
 
     def forward(self, x):
-        cur_input = x
-        for i in range(self.hidden_layer_num):
-            output = self.dnn_layers[i](cur_input)
-            cur_input = output
-        output = self.output_layer(output)
-        return output
+        cur_output = x
+        for i, now_layer in enumerate(self.dnn_layers):
+            cur_output = now_layer(cur_output)
+        return cur_output
