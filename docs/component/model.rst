@@ -1,6 +1,6 @@
-===================
-Model: Train&Predict
-===================
+============================================
+Interday Model: Model Training & Prediction
+============================================
 
 Introduction
 ===================
@@ -118,7 +118,7 @@ Know more about how to run 'Model' with estimator, please refer to `Estimator <e
 
 Qlib provides LightGBM and DNN models as the baseline, the following example shows how to run LightGBM as a single module. 
 
-.. note:: User needs to initialize package qlib with qlib.init first, please refer to `initialization <initialization.rst>`_.
+.. note:: User needs to initialize ``Qlib`` with ``qlib.init`` first, please refer to `initialization <initialization.rst>`_.
 
 
 .. code-block:: Python
@@ -164,14 +164,14 @@ Qlib provides LightGBM and DNN models as the baseline, the following example sho
     model.fit(x_train, y_train, x_validate, y_validate)
     _pred = model.predict(x_test)
 
-.. note:: 'QLibDataHandlerV1' is the data handler provided by Qlib, please refer to `Data Handler <data.html#data-handler>`_.
+.. note:: 'QLibDataHandlerV1' is the data handler provided by ``Qlib``, please refer to `Data Handler <data.html#data-handler>`_.
 
 Also, the above example has been given in ``examples.estimator.train_backtest_analyze.ipynb``.
 
 Custom Model
 ===================
 
-Qlib supports custom models, how to customize the model and integrate the model into Qlib, please refer to `How to integrate Model into Qlib <../start/integration.html>`_.
+Qlib supports custom models, how to customize the model and integrate the model into ``Qlib``, please refer to `How to integrate Model into Qlib <../start/integration.html>`_.
 
 
 API

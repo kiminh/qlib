@@ -8,7 +8,7 @@ Data Retrieval
 Introduction
 ====================
 
-Users can get stock data by Qlib. Following examples will demonstrate the basic user interface.
+Users can get stock data by ``Qlib``. Following examples will demonstrate the basic user interface.
 
 Examples
 ====================
@@ -16,7 +16,7 @@ Examples
 
 ``QLib`` Initialization:
 
-.. note:: In order to get the data, users need to initialize package qlib with qlib.init first. Please refer to `initialization <initialization.rst>`_.
+.. note:: In order to get the data, users need to initialize ``Qlib`` with `qlib.init` first. Please refer to `initialization <initialization.rst>`_.
 
 It is recommended to use the following code to initialize qlib:
 

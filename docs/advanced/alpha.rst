@@ -13,10 +13,10 @@ In quantitative trading practice, designing novel factors that can explain and p
 A formulaic alpha, as the name suggests, is a kind of alpha that can be presented as a formula or a mathematical expression.
 
 
-Building Formulaic Alphas in ``QLib``
+Building Formulaic Alphas in ``Qlib``
 ======================================
 
-In Qlib, users can easily build formulaic alphas.
+In ``Qlib``, users can easily build formulaic alphas.
 
 Example
 -----------------
@@ -45,7 +45,7 @@ Example
 
 Users can use ``Data Handler`` to build formulaic alphas `MACD` in qlib:
 
-.. note:: Users need to initialize package qlib with qlib.init first.  Please refer to `initialization <initialization.rst>`_.
+.. note:: Users need to initialize ``Qlib`` with `qlib.init` first.  Please refer to `initialization <initialization.rst>`_.
 
 .. code-block:: python
 
@@ -101,4 +101,4 @@ Reference
 
 To kown more about ``Data Handler``, please refer to `Data Handler <../component/data.html>`_
 
-To kown more about `feature`, please refer to `Feature <../component/data.html>`_
+To kown more about ``Data Api``, please refer to `Data Api <../component/data.html>`_
