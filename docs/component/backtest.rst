@@ -91,6 +91,6 @@ The backtest results are in the following form:
     Maximum Drawdown, please refer to `Maximum Drawdown (MDD) <https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp>`_.
 
 
-Api
+API
 ==============
-Please refer to `Backtest Api <../reference/api.html>`_.
+Please refer to `Backtest API <../reference/api.html>`_.

@@ -169,7 +169,7 @@ def get_exchange(
     return exchange
 
 
-# This is the api for compatibility for legacy code
+# This is the API for compatibility for legacy code
 def backtest(pred, account=1e9, shift=1, benchmark="SH000905", verbose=True, **kwargs):
     """This function will help you set a reasonable Exchange and provide default value for strategy
     Parameter
@@ -245,7 +245,7 @@ def backtest(pred, account=1e9, shift=1, benchmark="SH000905", verbose=True, **k
         account=account,
         benchmark=benchmark,
     )
-    # for  compatibility of the old api. return the dict positions
+    # for  compatibility of the old API. return the dict positions
     positions = {k: p.position for k, p in positions.items()}
     return report_df, positions
 

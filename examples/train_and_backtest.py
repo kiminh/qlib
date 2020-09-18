@@ -54,7 +54,7 @@ if __name__ == "__main__":
     }
 
     # use default DataHandler
-    # custom DataHandler, refer to: TODO: DataHandler api url
+    # custom DataHandler, refer to: TODO: DataHandler API url
     x_train, y_train, x_validate, y_validate, x_test, y_test = QLibDataHandlerV1(**DATA_HANDLER_CONFIG).get_split_data(
         **TRAINER_CONFIG
     )
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         "num_threads": 20,
     }
     # use default model
-    # custom Model, refer to: TODO: Model api url
+    # custom Model, refer to: TODO: Model API url
     model = LGBModel(**MODEL_CONFIG)
     model.fit(x_train, y_train, x_validate, y_validate)
     _pred = model.predict(x_test)
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     }
 
     # use default strategy
-    # custom Strategy, refer to: TODO: Strategy api url
+    # custom Strategy, refer to: TODO: Strategy API url
     strategy = TopkAmountStrategy(**STRATEGY_CONFIG)
     report_normal, positions_normal = normal_backtest(pred_score, strategy=strategy, **BACKTEST_CONFIG)
 

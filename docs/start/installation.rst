@@ -13,8 +13,8 @@ How to Install Qlib
 
 Please execute the following process to install ``Qlib``:
 
-- Change the directory to Qlib, and the file'setup.py' exists in the directory
-- Then, execute the following command:
+- Change the directory to Qlib, in which the file ``setup.py`` exists.
+- Then, please execute the following command:
    
    .. code-block:: bash
 
@@ -28,7 +28,7 @@ Please execute the following process to install ``Qlib``:
    ``Qlib`` needs lightgbm and tensorflow packages, use pip to install them.
 
 .. note::
-   Do not import qlib in the ``Qlib`` folder, otherwise errors may occur.
+   Do not import qlib in the repository folder which contains ``qlib``, otherwise errors may occur.
    
 
 
