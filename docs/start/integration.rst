@@ -1,24 +1,26 @@
 =========================================
-Integrate Custom Models into QLib
+Integrate Custom Models into ``QLib``
 =========================================
 
 Introduction
 ===================
-The baseline of the qlib model includes lightgbm and dnn. In addition to using the default model, users can their own integrate custom models into qlib.
+
+``Qlib`` provides the baseline of the ``Model`` including ``lightgbm`` and ``dnn``. In addition to using the default model, users can integrate their own custom models into ``Qlib``.
 
 In order to use the custom model, user can do as follows.
 
 - Define a custom model class, which should be a subclass of the `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_
 - Write a configuration file that describes the path and parameters of the custom model
+- Test the custom model
 
-The following is an example of integrating a custom lightgbm model into qlib:
+The following is an example of integrating a custom ``lightgbm`` model into ``Qlib``:
 
-Define a custom model class
+Custom Model Class
 ===========================
 The Custom models need to inherit `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_ and override the methods in it.
 
 - Override the `__init__` method
-    - Qlib passes the initialized parameters to the \_\_init\_\_ method
+    - ``Qlib`` passes the initialized parameters to the \_\_init\_\_ method
     - The parameter must be consistent with the hyperparameters in the configuration file.
     - Code Example: In the following example, the hyperparameter filed of the configuration file should contain parameters such as ‘loss:mse’.
     .. code-block:: Python
@@ -31,7 +33,7 @@ The Custom models need to inherit `qlib.contrib.model.base.Model <../reference/a
             self._model = None
 
 - Override the `fit` method
-    - Qlib calls the fit method to train the model
+    - ``Qlib`` calls the fit method to train the model
     - The parameters must include training feature 'x_train', training label 'y_train', test feature 'x_valid', test label 'y_valid'at least.
     - The parameters could include some optional parameters with default values, such as train weight 'w_train', test weight 'w_valid' and 'num_boost_round = 1000'.
     - Code Example: In the following example, 'num_boost_round = 1000' is an optional parameter.
@@ -99,10 +101,10 @@ The Custom models need to inherit `qlib.contrib.model.base.Model <../reference/a
             self._model = lgb.Booster(params={'model_str': buffer.decode('utf-8')})
 
 
-Write the configuration
+Configuration File
 =======================
 
-The configuration file is described in detail in the `estimator <../advanced/estimator.html#Example>`_ document. In order to integrate the custom model into qlib, you need to modify the "model" field in the configuration file.
+The configuration file is described in detail in the `estimator <../advanced/estimator.html#Example>`_ document. In order to integrate the custom model into ``Qlib``, you need to modify the "model" field in the configuration file.
 
 - Example: The following example describes the ‘model’ field of configuration file about the custom lightgbm model mentioned above , where ‘module_path’ is the module path, ‘class’ is the class name, and ‘args’ is the hyperparameter passed into the __init__ method. All parameters in the field is passed to 'self._params' by '\*\*kwargs' in `__init__` except 'loss = mse'. 
 
@@ -122,19 +124,22 @@ The configuration file is described in detail in the `estimator <../advanced/est
             num_leaves: 210
             num_threads: 20
 
-Test the custom model
+Users could find configuration file of the baseline of the ``Model`` in ``qlib/examples/estimator/estimator_config.yaml`` and ``qlib/examples/estimator/estimator_config_dnn.yaml``
+
+Model Testing
 =====================
-Assuming that the configuration file is named test.yaml, user can run the following command to test the custom model:
+Assuming that the configuration file is ``qlib/examples/estimator/estimator_config.yaml``, user can run the following command to test the custom model:
 
 .. code-block:: bash
 
-    estimator -c test.yaml
+    estimator -c qlib/examples/estimator/estimator_config.yaml
 
-.. note:: 'estimator' is a built-in command of our program.
+.. note:: ``estimator`` is a built-in command of ``Qlib``.
 
-Also, 'Model' can also be tested as a single module. An example has been given in 'examples.estimator.train_backtest_analyze.ipynb'.
+Also, ``Model`` can also be tested as a single module. An example has been given in ``examples.estimator.train_backtest_analyze.ipynb``. 
 
-Know More about 'Model'
+
+Reference
 =====================
 
-If user want to know more about 'model', please refer to document `Use 'Model' to Train&Predict <../advanced/model.rst>`_ and API `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_.
+To know more about ``Model``, please refer to `Interday Model: Model Training & Prediction <../advanced/model.rst>`_ and `Model API <../reference/api.html#module-qlib.contrib.model.base>`_.

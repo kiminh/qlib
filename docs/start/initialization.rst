@@ -6,7 +6,7 @@ Qlib Initialization
 .. currentmodule:: qlib
 
 
-Initialize ``qlib`` Package
+Initialization
 =========================
 
 Please execute the following process to initialize ``Qlib``.
@@ -32,9 +32,9 @@ Please execute the following process to initialize ``Qlib``.
 
 
 Parameters
-===============================
+-------------------
 
-In fact, in addition to 'mount_path' and 'region', ``qlib.init`` has other parameters. The following are all the parameters of ``qlib.init``:
+In fact, in addition to `mount_path` and `region`, `qlib.init` has other parameters. The following are all the parameters of `qlib.init`:
 
 - `mount_path`
     Type: str. The local directory where the data loaded by ``get_data.py`` is stored.
@@ -53,7 +53,7 @@ In fact, in addition to 'mount_path' and 'region', ``qlib.init`` has other param
 
     .. note:: 
         
-        The value of ``region`` should be aligned with the data stored in ``mount_path``. Currently, 'scripts/get_data.py' only provides China stock market data. If user wants to use the US stock market data, he/she should prepare his/her own US stock data in 'mount_path' and switch to US stock market mode.
+        The value of `region` should be aligned with the data stored in `mount_path`. Currently, ``scripts/get_data.py`` only provides China stock market data. If users want to use the US stock market data, they should prepare their own US-stock data in `mount_path` and switch to US-stock mode.
 
     .. note::
         

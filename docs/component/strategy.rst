@@ -1,7 +1,7 @@
 .. _strategy:
-==========================
-Strategy: Portfolio Management
-==========================
+========================================
+Interday Strategy: Portfolio Management
+========================================
 .. currentmodule:: qlib
 
 Introduction

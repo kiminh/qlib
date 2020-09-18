@@ -1,12 +1,12 @@
 .. _data:
-============================
-Data: Data Framework&Usage
-============================
+================================
+Data Layer: Data Framework&Usage
+================================
 
 Introduction
 ============================
 
-``Qlib Data`` supports constructing data sets from raw data, and the ``Qlib Data`` framework includes three layers as follows.
+``Qlib Data`` can be used to construct data sets from raw data, and the ``Qlib Data`` framework includes four layers as follows.
 
 - Raw Data
 - Data API
@@ -17,25 +17,25 @@ Introduction
 Raw Data 
 ============================
 
-``Qlib`` provides the script 'scripts/get_data.py' to download the raw data that will be used to initialize the qlib package, please refer to `Initialization <../start/initialization.rst>`_.
+``Qlib`` provides the script ``scripts/get_data.py`` to download the raw data that will be used to initialize the qlib package, please refer to `Initialization <../start/initialization.rst>`_.
 
-When ``Qlib`` is initialized, users can choose A-share mode or US stocks mode, please refer to `Initialization <../start/initialization.rst>`_.
+When ``Qlib`` is initialized, users can choose china-stock mode or US-stock mode, please refer to `Initialization <../start/initialization.rst>`_.
 
-A-share Mode
+China-Stock Market Mode
 --------------------------------
 
-If users use ``Qlib`` in A-share mode, A-share data is required. The script'scripts/get_data.py' provides methods to download A-share data. If users want to use A-share mode, they need to do as follows.
+If users use ``Qlib`` in china-stock mode, china-stock data is required. The script ``scripts/get_data.py`` can be used to download china-stock data. If users want to use ``Qlib`` in china-stock mode, they need to do as follows.
 
 - Download data in qlib format
-    Run the following command to download A-share data in csv format. 
+    Run the following command to download china-stock data in csv format. 
 
     .. code-block:: bash
 
         python scripts/get_data.py qlib_data_cn --target_dir ~/.qlib/qlib_data/cn_data
 
-    Users can find A-share data in qlib format in the'~/.qlib/csv_data/cn_data' directory.
+    Users can find china-stock data in qlib format in the'~/.qlib/csv_data/cn_data' directory.
 
-- Initialize Qlib in A-share Mode
+- Initialize ``Qlib`` in china-stock mode
     Users only need to initialize ``Qlib`` as follows.
     
     .. code-block:: python
@@ -44,29 +44,27 @@ If users use ``Qlib`` in A-share mode, A-share data is required. The script'scri
         qlib.init(mount_path='~/.qlib/qlib_data/cn_data', region=REG_CN)
         
 
-Please refer to `Script API <../reference/api.html>`_.
-
-US Stock Mode
+US-Stock Market Mode
 -------------------------
-If users use ``Qlib`` in US Stock mode, US stock data is required. Qlib does not mention script to download US stock data. If users want to use Qlib in US stock mode, they need to do as follows.
+If users use ``Qlib`` in US-stock mode, US-stock data is required. ``Qlib`` does not provide script to download US-stock data. If users want to use ``Qlib`` in US-stock market mode, they need to do as follows.
 
 - Prepare data in csv format
-    Users need to prepare US stock data in csv format by themselves, which is in the same format as the A-share data in csv format. Please download the A-share csv data as follows to know more about the format. 
+    Users need to prepare US-stock data in csv format by themselves, which is in the same format as the china-stock data in csv format. Please download the china-stock data in csv format as follows for reference of format.
 
     .. code-block:: bash
 
         python scripts/get_data.py csv_data_cn --target_dir ~/.qlib/csv_data/cn_data
     
 
-- Convert data from csv format to Qlib format
-    Qlib provides the 'scripts/dump_bin.py' to convert data from csv format to qlib format.
-    Assuming that the users store the US Stock data in csv format in path '~/.qlib/csv_data/us_data', they need to execute the following command to convert the data from csv format to Qlib format:
+- Convert data from csv format to ``Qlib`` format
+    ``Qlib`` provides the script ``scripts/dump_bin.py`` to convert data from csv format to qlib format.
+    Assuming that the users store the US-stock data in csv format in path '~/.qlib/csv_data/us_data', they need to execute the following command to convert the data from csv format to ``Qlib`` format:
 
     .. code-block:: bash
 
         python scripts/dump_bin.py dump --csv_path  ~/.qlib/csv_data/us_data --qlib_dir ~/.qlib/qlib_data/us_data --include_fields open,close,high,low,volume,factor
 
-- Initialize ``Qlib`` in US stock mode
+- Initialize ``Qlib`` in US-stock mode
     Users only need to initialize ``Qlib`` as follows.
     
     .. code-block:: python
@@ -82,7 +80,7 @@ Data API
 
 Data Retrieval
 ---------------
-Users can use APIs in `qlib.data` to retrieve data, please refer to `Data Retrieval <../start/getdata.html>`_.
+Users can use APIs in ``qlib.data`` to retrieve data, please refer to `Data Retrieval <../start/getdata.html>`_.
 
 Filter
 -------------------
@@ -114,8 +112,10 @@ Feature
 
 To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
 
+API
+-------------
 
-
+To know more about ``Data Api``, please refer to `Data Api <../reference/api.html>`_.
 
 Data Handler
 =================
@@ -148,7 +148,7 @@ Qlib also provides two functions to help user init the data handler, user can ov
     User can init the raw df, feature names and label names of data handler in this function. 
     If the index of feature df and label df are not same, user need to override this method to merge them (e.g. inner, left, right merge).
 
-If users want to load features and labels by config, users can inherit `qlib.contrib.estimator.handler.ConfigDataHandler`, Qlib also have provided some preprocess method in this subclass.
+If users want to load features and labels by config, users can inherit ``qlib.contrib.estimator.handler.ConfigDataHandler``, ``Qlib`` also have provided some preprocess method in this subclass.
 If users want to use qlib data, `QLibDataHandler` is recommended. Users can inherit their custom class from `QLibDataHandler`, which is also a subclass of `ConfigDataHandler`.
 
 
@@ -174,7 +174,7 @@ Know more about how to run ``Data Handler`` with ``estimator``, please refer to 
 
 Qlib provides implemented data handler `QLibDataHandlerV1`. The following example shows how to run 'QLibDataHandlerV1' as a single module. 
 
-.. note:: User needs to initialize package qlib with qlib.init first, please refer to `initialization <initialization.rst>`_.
+.. note:: User needs to initialize ``Qlib`` with `qlib.init` first, please refer to `initialization <initialization.rst>`_.
 
 
 .. code-block:: Python
@@ -213,7 +213,10 @@ Qlib provides implemented data handler `QLibDataHandlerV1`. The following exampl
 
 Also, the above example has been given in ``examples.estimator.train_backtest_analyze.ipynb``.
 
-To know more abot 'Data Handler', please refer to `Data Handler API <../reference/api.html#handler>`_.
+API
+---------
+
+To know more abot ``Data Handler``, please refer to `Data Handler API <../reference/api.html#handler>`_.
 
 Cache
 ==========
@@ -308,3 +311,8 @@ Data and cache file structure on server
                 - .meta : an assorted meta file recording the stockpool config, field names and visit times
                 - .index : an assorted index file recording the line index of all calendars
             - ...
+
+API
+--------------
+
+To know more abot ``Cache``, please refer to `Cache API <../reference/api.html#handler>`_.

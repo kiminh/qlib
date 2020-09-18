@@ -1,13 +1,16 @@
 .. _backtest:
-===================================
-Backtest: Model&Strategy Evaluation
-===================================
+============================================
+Intraday Trading: Model&Strategy Testing
+============================================
 .. currentmodule:: qlib
 
 Introduction
 ===================
 
-The ``Backtest`` module is used to evaluate models and strategies. By ``Backtest``, users can check the performance of custom model/strategy.
+The ``Backtest`` module uses ``Order Executor`` to trade and execute orders produced by ``Strategy``.
+
+The ``Backtest`` module could be used to test models and strategies. By ``Backtest``, users can check the performance of custom model/strategy.
+
 
 
 Example
@@ -91,6 +94,6 @@ The backtest results are in the following form:
     Maximum Drawdown, please refer to `Maximum Drawdown (MDD) <https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp>`_.
 
 
-API
+REFERENCE
 ==============
-Please refer to `Backtest API <../reference/api.html>`_.
+To know more about ``Backtest``, please refer to `Backtest API <../reference/api.html>`_.

@@ -1,6 +1,6 @@
 .. _estimator:
 =================================
-Estimator: Workflow Organization
+Estimator: Workflow Management
 =================================
 .. currentmodule:: qlib
 
@@ -24,7 +24,7 @@ By ``Estimator``, user can start an 'experiment', which has the following proces
 
 A concrete execution of the whole workflow is called an experiment.
 
-For each experiment, Qlib will capture the details of model training, performance evalution results and basic infomation(e.g. names, ids). The captured data will be stored in backend-storge(disk or database).
+For each experiment, ``Qlib`` will capture the details of model training, performance evalution results and basic infomation(e.g. names, ids). The captured data will be stored in backend-storge(disk or database).
 
 Example
 ===================
@@ -113,7 +113,7 @@ Before using ``estimator``, users need to prepare a configuration file. The foll
 Experiment Field
 --------------------
 
-First, the configuration file needs to have a field about the experiment, whose key is `experiment`. This field and its contents determine how `estimator` tracks and persists this `experiment`. Qlib used `sacred`, a lightweight open-source tool designed to configure, organize, generate logs, and manage experiment results. The field `experiment` will determine the partial behavior of `sacred`.
+First, the configuration file needs to have a field about the experiment, whose key is `experiment`. This field and its contents determine how `estimator` tracks and persists this `experiment`. ``Qlib`` used `sacred`, a lightweight open-source tool designed to configure, organize, generate logs, and manage experiment results. The field `experiment` will determine the partial behavior of `sacred`.
 
 Usually, in the running process of `estimator`, those following will be managed by `sacred`:
 
@@ -276,7 +276,7 @@ Qlib support custom models, but it must be a subclass of the `qlib.contrib.model
             loss: binary
 
 
-The class `SomeModel` should be in the module `custom_model`, and Qlib could parse the `module_path` to load the class.
+The class `SomeModel` should be in the module `custom_model`, and ``Qlib`` could parse the `module_path` to load the class.
 
 To Know more about ``Model``, please refer to `Model <model.html>`_.
 
@@ -338,7 +338,7 @@ Users can use the specified data handler by config as follows.
         Drop Nan label, bool type, default value is True. Some multi-label tasks will use this.
 
     - `normalize_method` (Optional in args)
-        Normalzie data by given method. str type. Qlib give two normalize method, `MinMax` and `Std`.
+        Normalzie data by given method. str type. ``Qlib`` give two normalize method, `MinMax` and `Std`.
         If users wants to build their own method, please override `_process_normalize_feature`.
   
 - `filter`
@@ -374,9 +374,9 @@ Qlib support custom data handler, but it must be a subclass of the ``qlib.contri
             end_date: 2018-04-30  
             feature_label_config: /data/qlib/feature_config/feature_config.yaml
 
-The class `SomeDataHandler` should be in the module `custom_data_handler`, and Qlib could parse the `module_path` to load the class.
+The class `SomeDataHandler` should be in the module `custom_data_handler`, and ``Qlib`` could parse the `module_path` to load the class.
 
-If users want to load features and labels by config, they can inherit ``qlib.contrib.estimator.handler.ConfigDataHandler``, Qlib also has provided some preprocess method in this subclass.
+If users want to load features and labels by config, they can inherit ``qlib.contrib.estimator.handler.ConfigDataHandler``, ``Qlib`` also has provided some preprocess method in this subclass.
 If users want to use qlib data, `QLibDataHandler` is recommended, from which users can inherit custom class. `QLibDataHandler` is also a subclass of `ConfigDataHandler`.
 
 To Know more about ``Data Handler``, please refer to `Data Framework&Usage <data.html>`_.
@@ -468,7 +468,7 @@ Qlib support custom trainer, but it must be a subclass of the `qlib.contrib.esti
             test_end_date: 2017-07-31
 
 
-The class `SomeTrainer` should be in the module `custom_trainer`, and Qlib could parse the `module_path` to load the class.
+The class `SomeTrainer` should be in the module `custom_trainer`, and ``Qlib`` could parse the `module_path` to load the class.
 
 Strategy Field
 -----------------
@@ -501,7 +501,7 @@ Users can specify strategy through a config file, for example:
 Custom Strategy
 ^^^^^^^^^^^^^^^^^^^
 
-Qlib support custom strategy, but it must be a subclass of the `qlib.contrib.strategy.strategy.BaseStrategy`, the config for custom strategy may be as following,
+Qlib support custom strategy, but it must be a subclass of the ``qlib.contrib.strategy.strategy.BaseStrategy``, the config for custom strategy may be as following,
 
 
 .. code-block:: YAML
@@ -510,7 +510,7 @@ Qlib support custom strategy, but it must be a subclass of the `qlib.contrib.str
         class: SomeStrategy
         module_path: /tmp/my_experment/custom_strategy.py
 
-The class `SomeStrategy` should be in the module `custom_strategy`, and Qlib could parse the `module_path` to load the class.
+The class `SomeStrategy` should be in the module `custom_strategy`, and ``Qlib`` could parse the `module_path` to load the class.
 
 To Know more about ``Strategy``, please refer to `Strategy <strategy.html>`_.
 
@@ -534,7 +534,7 @@ Users can specify `backtest` through a config file, for example:
               - $factor
 
 - `normal_backtest_args`
-    Normal backtest parameters. All the parameters in this section will be passed to the `qlib.contrib.evaluate.backtest` function in the form of `**kwargs`.
+    Normal backtest parameters. All the parameters in this section will be passed to the ``qlib.contrib.evaluate.backtest`` function in the form of `**kwargs`.
 
     - `benchmark`
         Stock index symbol, str or list type, the default value is `None`.
@@ -576,8 +576,8 @@ The `qlib_data` field describes the parameters of qlib initialization.
 - `mount_path`
     The local directory where the data loaded by 'get_data.py' is stored.
 - `region`
-    - If region == `qlib.config.REG_CN`, 'qlib' will be initialized in US stock mode. 
-    - If region == `qlib.config.REG_US`, 'qlib' will be initialized in A-share mode.
+    - If region == ``qlib.config.REG_CN``, 'qlib' will be initialized in US-stock mode. 
+    - If region == ``qlib.config.REG_US``, 'qlib' will be initialized in china-stock mode.
 
 Please refer to `Initialization <../start/initialization.rst>`_.
 

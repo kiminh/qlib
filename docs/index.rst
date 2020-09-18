@@ -1,8 +1,8 @@
 ============================================================
-QLib Documentation
+``Qlib`` Documentation
 ============================================================
 
-Qlib is an AI-oriented quantitative investment platform, which aims to realize the potential, empower the research, and create the value of AI technologies in quantitative investment.
+``Qlib`` is an AI-oriented quantitative investment platform, which aims to realize the potential, empower the research, and create the value of AI technologies in quantitative investment.
 
 .. _user_guide:
 
@@ -18,7 +18,7 @@ Document Structure
    :maxdepth: 3
    :caption: INTRODUCTION:
 
-   Introduction <introduction/introduction.rst>
+   Introduction&Framework <introduction/introduction.rst>
 
 .. toctree::
    :maxdepth: 3
@@ -29,7 +29,6 @@ Document Structure
    Data Retrieval <start/getdata.rst>
    Integrate Custom Models <start/integration.rst>
    
-
 .. toctree::
    :maxdepth: 3
    :caption: COMPONENTS:
