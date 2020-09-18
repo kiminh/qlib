@@ -61,8 +61,8 @@ class DNNModelPytorch(Model):
         **kwargs
     ):
         # Set logger.
-        self.logger = get_module_logger("DNNModelPytorch")
-        self.logger.info("DNN pytorch version...")
+        self.logger = get_module_logger('DNNModelPytorch')
+        self.logger.info('DNN pytorch version...')
 
         # set hyper-parameters.
         self.layers = layers
@@ -77,63 +77,39 @@ class DNNModelPytorch(Model):
         self.loss_type = loss
         self.visible_GPU = GPU
 
-        self.logger.info(
-            "DNN parameters setting:"
-            "\nlayers : {}"
-            "\nlr : {}"
-            "\nmax_steps : {}"
-            "\nbatch_size : {}"
-            "\nearly_stop_rounds : {}"
-            "\neval_steps : {}"
-            "\nlr_decay : {}"
-            "\nlr_decay_steps : {}"
-            "\noptimizer : {}"
-            "\nloss_type : {}"
-            "\neval_steps : {}"
-            "\nvisible_GPU : {}".format(
-                layers,
-                lr,
-                max_steps,
-                batch_size,
-                early_stop_rounds,
-                eval_steps,
-                lr_decay,
-                lr_decay_steps,
-                optimizer,
-                loss,
-                eval_steps,
-                GPU,
-            )
-        )
+        self.logger.info('DNN parameters setting:'
+                        '\nlayers : {}'
+                        '\nlr : {}'
+                        '\nmax_steps : {}'
+                        '\nbatch_size : {}'
+                        '\nearly_stop_rounds : {}'
+                        '\neval_steps : {}'
+                        '\nlr_decay : {}'
+                        '\nlr_decay_steps : {}'
+                        '\noptimizer : {}'
+                        '\nloss_type : {}'
+                        '\neval_steps : {}'
+                        '\nvisible_GPU : {}'.format(layers, lr, max_steps, batch_size, early_stop_rounds, eval_steps,
+                                                    lr_decay, lr_decay_steps, optimizer, loss, eval_steps, GPU))
 
-        if loss not in {"mse", "binary"}:
-            raise NotImplementedError("loss {} is not supported!".format(loss))
-        self._scorer = mean_squared_error if loss == "mse" else roc_auc_score
+        if loss not in {'mse', 'binary'}:
+            raise NotImplementedError('loss {} is not supported!'.format(loss))
+        self._scorer = mean_squared_error if loss == 'mse' else roc_auc_score
 
-        self.dnn_model = Net(input_dim, output_dim, layers, loss=self.loss_type)
-        if optimizer.lower() == "adam":
+        self.dnn_model = Net(input_dim, output_dim, layers, loss=self.loss_type).cuda()
+        if optimizer.lower() == 'adam':
             self.train_optimizer = optim.Adam(self.dnn_model.parameters(), lr=self.lr)
-        elif optimizer.lower() == "gd":
+        elif optimizer.lower() == 'gd':
             self.train_optimizer = optim.SGD(self.dnn_model.parameters(), lr=self.lr)
         else:
-            raise NotImplementedError("optimizer {} is not supported!".format(optimizer))
+            raise NotImplementedError('optimizer {} is not supported!'.format(optimizer))
 
         # Reduce learning rate when loss has stopped decrease
-        self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            self.train_optimizer,
-            mode="min",
-            factor=0.5,
-            patience=10,
-            verbose=True,
-            threshold=0.0001,
-            threshold_mode="rel",
-            cooldown=0,
-            min_lr=0.00001,
-            eps=1e-08,
-        )
+        self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.train_optimizer, mode='min', factor=0.5, patience=10, verbose=True,
+                                                   threshold=0.0001, threshold_mode='rel', cooldown=0, min_lr=0.00001,
+                                                   eps=1e-08)
 
         self._fitted = False
-        self.dnn_model.cuda()
 
         # set the visible GPU
         if self.visible_GPU:
@@ -152,7 +128,7 @@ class DNNModelPytorch(Model):
         save_path=None,
     ):
 
-        if w_train is None:
+if w_train is None:
             w_train = pd.DataFrame(np.ones_like(y_train.values), index=y_train.index)
         if w_valid is None:
             w_valid = pd.DataFrame(np.ones_like(y_valid.values), index=y_valid.index)
@@ -161,13 +137,13 @@ class DNNModelPytorch(Model):
         stop_steps = 0
         train_loss = 0
         best_loss = np.inf
-        evals_result["train"] = []
-        evals_result["valid"] = []
+        evals_result['train'] = []
+        evals_result['valid'] = []
 
         # train
-        self.logger.info("training...")
+        self.logger.info('training...')
         self._fitted = True
-
+        #return
         # prepare training data
         x_train_values = torch.from_numpy(x_train.values).float()
         y_train_values = torch.from_numpy(y_train.values).float()
@@ -186,7 +162,7 @@ class DNNModelPytorch(Model):
         for step in range(self.max_steps):
             if stop_steps >= self.early_stop_rounds:
                 if verbose:
-                    self.logger.info("\tearly stop")
+                    self.logger.info('\tearly stop')
                 break
             loss = AverageMeter()
             self.dnn_model.train()
@@ -202,15 +178,21 @@ class DNNModelPytorch(Model):
             w_batch_cuda = w_batch.float().cuda()
 
             # forward
+            #print('x_batch_cuda:', np.isnan(x_batch_cuda.cpu().numpy()).any())
             preds = self.dnn_model(x_batch_cuda)
-
+            #print('x_batch_cuda:', x_batch_cuda)
+            #print('preds:', preds)
+            #print('w_batch_cuda:', w_batch_cuda)
+            #print('y_batch_cuda', y_batch_cuda)
             cur_loss = self.get_loss(preds, w_batch_cuda, y_batch_cuda, self.loss_type)
+            #print('cur_loss:', cur_loss)
             cur_loss.backward()
             self.train_optimizer.step()
             loss.update(cur_loss.item())
 
             # validation
             train_loss += loss.val
+            #print(loss.val)
             if step and step % self.eval_steps == 0:
                 stop_steps += 1
                 train_loss /= self.eval_steps
@@ -224,18 +206,15 @@ class DNNModelPytorch(Model):
                     cur_loss_val = self.get_loss(preds, w_val_cuda, y_val_cuda, self.loss_type)
                     loss_val.update(cur_loss_val.item())
                 if verbose:
-                    self.logger.info(
-                        "[Epoch {}]: train_loss {:.6f}, valid_loss {:.6f}".format(step, train_loss, loss_val.val)
-                    )
-                evals_result["train"].append(train_loss)
-                evals_result["valid"].append(loss_val.val)
+                    self.logger.info("[Epoch {}]: train_loss {:.6f}, valid_loss {:.6f}".format(step, train_loss,
+                                                                                               loss_val.val))
+                evals_result['train'].append(train_loss)
+                evals_result['valid'].append(loss_val.val)
                 if loss_val.val < best_loss:
                     if verbose:
                         self.logger.info(
-                            "\tvalid loss update from {:.6f} to {:.6f}, save checkpoint.".format(
-                                best_loss, loss_val.val
-                            )
-                        )
+                            '\tvalid loss update from {:.6f} to {:.6f}, save checkpoint.'.format(best_loss,
+                                                                                                 loss_val.val))
                     best_loss = loss_val.val
                     stop_steps = 0
                     torch.save(self.dnn_model.state_dict(), save_path)
@@ -243,27 +222,29 @@ class DNNModelPytorch(Model):
                 # update learning rate
                 self.scheduler.step(cur_loss_val)
 
-        # restore the optimal parameters after training
+        # restore the optimal parameters after training ??
         self.dnn_model.load_state_dict(torch.load(save_path))
         torch.cuda.empty_cache()
 
     def get_loss(self, pred, w, target, loss_type):
-        if loss_type == "mse":
+        if loss_type == 'mse':
             sqr_loss = torch.mul(pred - target, pred - target)
             loss = torch.mul(sqr_loss, w).mean()
             return loss
-        elif loss_type == "binary":
+        elif loss_type == 'binary':
             loss = nn.BCELoss()
             return loss(pred, target)
         else:
-            raise NotImplementedError("loss {} is not supported!".format(loss_type))
+            raise NotImplementedError('loss {} is not supported!'.format(loss_type))
 
     def predict(self, x_test):
         if not self._fitted:
-            raise ValueError("model is not fitted yet!")
+            raise ValueError('model is not fitted yet!')
         x_test = torch.from_numpy(x_test.values).float().cuda()
         self.dnn_model.eval()
-        preds = self.dnn_model(x_test).detach().cpu().numpy()
+        
+        with torch.no_grad():
+            preds = self.dnn_model(x_test).detach().cpu().numpy()
         return preds
 
     def score(self, x_test, y_test, w_test=None):
@@ -317,47 +298,44 @@ class Net(nn.Module):
     def __init__(self, input_dim, output_dim, layers=(256, 256, 256), loss="mse"):
         super(Net, self).__init__()
         layers = [input_dim] + list(layers)
-        self.hidden_layer_num = len(layers)
         dnn_layers = []
         drop_input = nn.Dropout(0.1)
         dnn_layers.append(drop_input)
         for i, (input_dim, hidden_units) in enumerate(zip(layers[:-1], layers[1:])):
             fc = nn.Linear(input_dim, hidden_units)
-            # drop = nn.Dropout(0.2)
+            
             # relu = nn.ReLU()
             # activation = nn.Sigmoid()
-            activation = nn.Tanh()
+            activation = nn.ReLU()
             bn = nn.BatchNorm1d(hidden_units)
-            seq = nn.Sequential(fc, activation, bn)
+            drop = nn.Dropout(0.1)
+            seq = nn.Sequential(fc, bn, activation, drop)
             dnn_layers.append(seq)
 
-        drop_output = nn.Dropout(0.1)
-        dnn_layers.append(drop_output)
-        self.dnn_layers = nn.ModuleList(dnn_layers)
+        #drop_output = nn.Dropout(0.1)
+        #dnn_layers.append(drop_output)
 
-        if loss == "mse":
+        if loss == 'mse':
             fc = nn.Linear(hidden_units, output_dim)
-            self.output_layer = fc
+            dnn_layers.append(fc)
 
-        elif loss == "binary":
+        elif loss == 'binary':
             fc = nn.Linear(hidden_units, output_dim)
             sigmoid = nn.Sigmoid()
-            self.output_layer = nn.Sequential(fc, sigmoid)
+            dnn_layers.append(nn.Sequential(fc, sigmoid))
         else:
-            raise NotImplementedError("loss {} is not supported!".format(loss))
+            raise NotImplementedError('loss {} is not supported!'.format(loss))
         # optimizer
-
+        self.dnn_layers = nn.ModuleList(dnn_layers)
         self._weight_init()
 
     def _weight_init(self):
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                m.weight = nn.init.xavier_normal_(m.weight)
+                nn.init.xavier_normal_(m.weight, gain = 1)
 
     def forward(self, x):
-        cur_input = x
-        for i in range(self.hidden_layer_num):
-            output = self.dnn_layers[i](cur_input)
-            cur_input = output
-        output = self.output_layer(output)
-        return output
+        cur_output = x
+        for i, now_layer in enumerate(self.dnn_layers):
+            cur_output = now_layer(cur_output)
+        return cur_output
