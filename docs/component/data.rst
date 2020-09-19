@@ -247,7 +247,7 @@ Local Cache
     'ExpressionCache': 'ServerExpressionCache',
     'DatasetCache': 'ServerDatasetCache',
 
-User can find the cache interface here.
+Users can find the cache interface here.
 
 ExpressionCache
 ~~~~~~~~~~~~~~~~~~~~~
@@ -275,11 +275,12 @@ ServerExpressionCache
 .. autoclass:: qlib.data.cache.ServerExpressionCache
 
 ServerDatasetCache
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: qlib.data.cache.ServerDatasetCache
 
 
-Data and cache file structure on server
+Data and Cache file structure on server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: json
@@ -315,4 +316,4 @@ Data and cache file structure on server
 API
 --------------
 
-To know more abot ``Cache``, please refer to `Cache API <../reference/api.html#handler>`_.
+To know more about ``Cache``, please refer to `Cache API <../reference/api.html#handler>`_.

@@ -12,7 +12,7 @@ Document Structure
 .. toctree::
    :hidden:
 
-   Home <index.rst>
+   Home <self>
 
 .. toctree::
    :maxdepth: 3
@@ -29,6 +29,7 @@ Document Structure
    Data Retrieval <start/getdata.rst>
    Integrate Custom Models <start/integration.rst>
    
+
 .. toctree::
    :maxdepth: 3
    :caption: COMPONENTS:

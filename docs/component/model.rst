@@ -14,11 +14,11 @@ Qlib provides a base class `qlib.contrib.model.base.Model <../reference/api.html
 
 The base class provides the following interfaces:
 
-- `def __init__`
+- `__init__`
     - Initialization.
-    - If users use `estimator <../advanced/estimator.html>`_ to start an experiment, the parameter of `__init__` method shoule be consistent with the hyperparameters in the configuration file.
+    - If users use ``Estimator`` to start an ``experiment``, the parameter of `__init__` method shoule be consistent with the hyperparameters in the configuration file.
 
-- `def fit(self, x_train, y_train, x_valid, y_valid, w_train=None, w_valid=None, **kwargs)`
+- `fit(self, x_train, y_train, x_valid, y_valid, w_train=None, w_valid=None, **kwargs)`
     - Train model.
     - Parameter:
         - ``x_train``, pd.DataFrame type, train feature
@@ -112,13 +112,13 @@ For other interfaces such as ``save``, ``load``, ``finetune``, please refer to `
 Example
 ==================
 
-'Model' can be run with 'estimator' by modifying the configuration file, and can also be used as a single module. 
+``Model`` can be run with 'estimator' by modifying the configuration file, and can also be used as a single module. 
 
 Know more about how to run 'Model' with estimator, please refer to `Estimator <estimator.html#about-model>`_.
 
 Qlib provides LightGBM and DNN models as the baseline, the following example shows how to run LightGBM as a single module. 
 
-.. note:: User needs to initialize ``Qlib`` with ``qlib.init`` first, please refer to `initialization <initialization.rst>`_.
+.. note:: User needs to initialize ``Qlib`` with `qlib.init` first, please refer to `initialization <initialization.rst>`_.
 
 
 .. code-block:: Python

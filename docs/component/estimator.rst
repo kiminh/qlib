@@ -11,7 +11,7 @@ The components in :ref:`framework` is designed in a loosely-coupled way. User co
 Besides, ``Qlib`` provides more user-friendly interface named ``Estimator`` to automatically run the whole workflow defined by a config.
 The automatic workflow includes the the following process:
 
-By ``Estimator``, user can start an 'experiment', which has the following process:
+By ``Estimator``, user can start an ``experiment``, which has the following process:
 
 - Data
   - Loading
