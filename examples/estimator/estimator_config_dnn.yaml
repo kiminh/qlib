@@ -18,16 +18,15 @@ model:
         batch_size: 4096
         GPU: '0'
 data:
-  class: QLibDataHandlerV1
+  class: QLibDataHandlerClose
   args:
     dropna_label: True
     dropna_feature: True
   filter:
-    market: csi500
+    market: csi300
 trainer:
   class: StaticTrainer
   args:
-    rolling_period: 360
     train_start_date: 2007-01-01
     train_end_date: 2014-12-31
     validate_start_date: 2015-01-01
@@ -44,8 +43,8 @@ backtest:
     verbose: False
     limit_threshold: 0.095
     account: 100000000
-    benchmark: SH000905
-    deal_price: vwap
+    benchmark: SH000300
+    deal_price: close
     open_cost: 0.0005
     close_cost: 0.0015
     min_cost: 5

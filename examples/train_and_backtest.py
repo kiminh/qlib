@@ -8,11 +8,10 @@ import qlib
 import pandas as pd
 from qlib.config import REG_CN
 from qlib.contrib.model.gbdt import LGBModel
-from qlib.contrib.estimator.handler import QLibDataHandlerV1
+from qlib.contrib.estimator.handler import QLibDataHandlerClose
 from qlib.contrib.strategy.strategy import TopkAmountStrategy
 from qlib.contrib.evaluate import (
     backtest as normal_backtest,
-    long_short_backtest,
     risk_analysis,
 )
 from qlib.utils import exists_qlib_data
@@ -31,21 +30,21 @@ if __name__ == "__main__":
 
     qlib.init(mount_path=mount_path, region=REG_CN)
 
-    MARKET = "CSI500"
-    BENCHMARK = "SH000905"
+    MARKET = "CSI300"
+    BENCHMARK = "SH000300"
 
     ###################################
     # train model
     ###################################
     DATA_HANDLER_CONFIG = {
         "dropna_label": True,
-        "start_date": "2007-01-01",
+        "start_date": "2008-01-01",
         "end_date": "2020-08-01",
         "market": MARKET,
     }
 
     TRAINER_CONFIG = {
-        "train_start_date": "2007-01-01",
+        "train_start_date": "2008-01-01",
         "train_end_date": "2014-12-31",
         "validate_start_date": "2015-01-01",
         "validate_end_date": "2016-12-31",
@@ -55,9 +54,9 @@ if __name__ == "__main__":
 
     # use default DataHandler
     # custom DataHandler, refer to: TODO: DataHandler API url
-    x_train, y_train, x_validate, y_validate, x_test, y_test = QLibDataHandlerV1(**DATA_HANDLER_CONFIG).get_split_data(
-        **TRAINER_CONFIG
-    )
+    x_train, y_train, x_validate, y_validate, x_test, y_test = QLibDataHandlerClose(
+        **DATA_HANDLER_CONFIG
+    ).get_split_data(**TRAINER_CONFIG)
 
     MODEL_CONFIG = {
         "loss": "mse",
@@ -98,7 +97,7 @@ if __name__ == "__main__":
         "limit_threshold": 0.095,
         "account": 100000000,
         "benchmark": BENCHMARK,
-        "deal_price": "vwap",
+        "deal_price": "close",
         "open_cost": 0.0005,
         "close_cost": 0.0015,
         "min_cost": 5,
@@ -109,17 +108,11 @@ if __name__ == "__main__":
     strategy = TopkAmountStrategy(**STRATEGY_CONFIG)
     report_normal, positions_normal = normal_backtest(pred_score, strategy=strategy, **BACKTEST_CONFIG)
 
-    # long short backtest
-    long_short_reports = long_short_backtest(pred_score, topk=50)
-
     ###################################
     # analyze
     # If need a more detailed analysis, refer to: examples/train_and_bakctest.ipynb
     ###################################
     analysis = dict()
-    analysis["pred_long"] = risk_analysis(long_short_reports["long"])
-    analysis["pred_short"] = risk_analysis(long_short_reports["short"])
-    analysis["pred_long_short"] = risk_analysis(long_short_reports["long_short"])
     analysis["sub_bench"] = risk_analysis(report_normal["return"] - report_normal["bench"])
     analysis["sub_cost"] = risk_analysis(report_normal["return"] - report_normal["bench"] - report_normal["cost"])
     analysis_df = pd.concat(analysis)  # type: pd.DataFrame
