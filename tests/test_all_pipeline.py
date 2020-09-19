@@ -13,7 +13,7 @@ import qlib
 from qlib.config import REG_CN
 from qlib.utils import drop_nan_by_y_index
 from qlib.contrib.model.gbdt import LGBModel
-from qlib.contrib.estimator.handler import QLibDataHandlerV1
+from qlib.contrib.estimator.handler import QLibDataHandlerClose
 from qlib.contrib.strategy.strategy import TopkAmountStrategy
 from qlib.contrib.evaluate import (
     backtest as normal_backtest,
@@ -25,9 +25,9 @@ from qlib.utils import exists_qlib_data
 
 DATA_HANDLER_CONFIG = {
     "dropna_label": True,
-    "start_date": "2007-01-01",
+    "start_date": "2008-01-01",
     "end_date": "2020-08-01",
-    "market": "CSI500",
+    "market": "CSI300",
 }
 
 MODEL_CONFIG = {
@@ -43,7 +43,7 @@ MODEL_CONFIG = {
 }
 
 TRAINER_CONFIG = {
-    "train_start_date": "2007-01-01",
+    "train_start_date": "2008-01-01",
     "train_end_date": "2014-12-31",
     "validate_start_date": "2015-01-01",
     "validate_end_date": "2016-12-31",
@@ -60,8 +60,8 @@ BACKTEST_CONFIG = {
     "verbose": False,
     "limit_threshold": 0.095,
     "account": 100000000,
-    "benchmark": "SH000905",
-    "deal_price": "vwap",
+    "benchmark": "SH000300",
+    "deal_price": "close",
     "open_cost": 0.0005,
     "close_cost": 0.0015,
     "min_cost": 5,
@@ -80,9 +80,9 @@ def train():
             model performance
     """
     # get data
-    x_train, y_train, x_validate, y_validate, x_test, y_test = QLibDataHandlerV1(**DATA_HANDLER_CONFIG).get_split_data(
-        **TRAINER_CONFIG
-    )
+    x_train, y_train, x_validate, y_validate, x_test, y_test = QLibDataHandlerClose(
+        **DATA_HANDLER_CONFIG
+    ).get_split_data(**TRAINER_CONFIG)
 
     # train
     model = LGBModel(**MODEL_CONFIG)
@@ -165,9 +165,7 @@ class TestAllFlow(unittest.TestCase):
         )
         analyze_df = analyze(TestAllFlow.REPORT_NORMAL, TestAllFlow.LONG_SHORT_REPORTS)
         self.assertGreaterEqual(
-            analyze_df.loc(axis=0)["sub_cost", "annual"].values[0],
-            0.10,
-            "backtest failed",
+            analyze_df.loc(axis=0)["sub_cost", "annual"].values[0], 0.10, "backtest failed",
         )
 
 
