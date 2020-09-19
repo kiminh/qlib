@@ -807,20 +807,26 @@ class ServerDatasetCache(DatasetCache):
     def gen_dataset_cache(self, cache_path, instruments, fields, freq):
         """gen_dataset_cache
 
-        NOTE:This function does not consider the cache read write lock. Please
-             Aquire the lock outside this function
+        .. note:: This function does not consider the cache read write lock. Please 
+        Aquire the lock outside this function
 
         The format the cache contains 3 parts(followed by typical filename).
+        
         - index    : cache/d41366901e25de3ec47297f12e2ba11d.index
             - The content of the file may be in following format(pandas.Series)
-                                    start end
-                1999-11-10 00:00:00     0   1
-                1999-11-11 00:00:00     1   2
-                1999-11-12 00:00:00     2   3
-                ...
-                NOTE: The start is closed. The end is open!!!!!
+                
+                .. code-block:: python
+                
+                                        start end
+                    1999-11-10 00:00:00     0   1
+                    1999-11-11 00:00:00     1   2
+                    1999-11-12 00:00:00     2   3
+                    ...
+
+            .. note:: The start is closed. The end is open!!!!!
+            
             - Each line contains two element <timestamp, end_index>
-                - It indicates the `end_index` of the data for `timestamp`
+            - It indicates the `end_index` of the data for `timestamp`
 
         - meta data: cache/d41366901e25de3ec47297f12e2ba11d.meta
         - data     : cache/d41366901e25de3ec47297f12e2ba11d

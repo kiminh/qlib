@@ -172,7 +172,7 @@ def get_exchange(
 # This is the API for compatibility for legacy code
 def backtest(pred, account=1e9, shift=1, benchmark="SH000905", verbose=True, **kwargs):
     """This function will help you set a reasonable Exchange and provide default value for strategy
-    Parameter
+    Parameters
     ----------
 
     # backtest workflow related or commmon arguments
@@ -223,7 +223,8 @@ def backtest(pred, account=1e9, shift=1, benchmark="SH000905", verbose=True, **k
         limit move 0.1 (10%) for example, long and short with same limit
     extract_codes: bool
         will we pass the codes extracted from the pred to the exchange.
-        NOTE: This will be faster with offline qlib.
+        
+        .. note:: This will be faster with offline qlib.
     """
     # check strategy:
     spec = inspect.getfullargspec(get_strategy)

@@ -1,9 +1,11 @@
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 __pycache__/
+
 *.pyc
 *.ipynb
 .ipynb_checkpoints
 _build
+
 
 *.pkl
 *.hd5
@@ -22,3 +24,4 @@ _build
 mlruns/
 
 tags
+
