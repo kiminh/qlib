@@ -113,12 +113,26 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
 
     Run `examples/estimator/analyze_from_estimator.ipynb` in `jupyter notebook`
     1.  forecasting signal analysis
-        - Model Performance
-        ![Model Performance](docs/_static/img/model_performance.png)
+        - Cumulative Return
+
+        ![Cumulative Return](docs/_static/img/analysis/analysis_model_cumulative_return.png)
+        ![long_short](docs/_static/img/analysis/analysis_model_long_short.png)
+        - Information Coefficient(IC)
+
+        ![Information Coefficient](docs/_static/img/analysis/analysis_model_IC.png)        
+        ![Monthy IC](docs/_static/img/analysis/analysis_model_monthy_IC.png)        
+        ![IC](docs/_static/img/analysis/analysis_model_NDQ.png)
+        - Auto Correlation
+
+        ![Auto Correlation](docs/_static/img/analysis/analysis_model_auto_correlation.png)
+
+        
+
 
     2.  portfolio analysis
         - Report
-        ![Report](docs/_static/img/report.png)
+  
+        ![Report](docs/_static/img/analysis/report.png)
         <!-- 
         - Score IC
         ![Score IC](docs/_static/img/score_ic.png)
