@@ -82,6 +82,20 @@ Data Retrieval
 ---------------
 Users can use APIs in ``qlib.data`` to retrieve data, please refer to `Data Retrieval <../start/getdata.html>`_.
 
+Feature
+------------------
+
+``Qlib`` provides `Feature` and `ExpressionOps` to fetch the features according to users' need.
+
+- `Feature`
+    Load data from data provider.
+
+- `ExpressionOps`
+    `ExpressionOps` will use operator for feature construction.
+    To know more about  ``Operator``, please refer to `Operator API <../reference/api.html>`_.
+
+To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
+
 Filter
 -------------------
 ``Qlib`` provides `NameDFilter` and `ExpressionDFilter` to filter the instruments according to users' need.
@@ -98,19 +112,6 @@ Filter
 
 To know more about ``Filter``, please refer to `Filter API <../reference/api.html>`_.
 
-Feature
-------------------
-
-``Qlib`` provides `Feature` and `ExpressionOps` to fetch the features according to users' need.
-
-- `Feature`
-    Load data from data provider.
-
-- `ExpressionOps`
-    `ExpressionOps` will use operator for feature construction.
-    To know more about  ``Operator``, please refer to `Operator API <../reference/api.html>`_.
-
-To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
 
 API
 -------------

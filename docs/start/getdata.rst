@@ -47,9 +47,9 @@ Load instruments of certain stockpool in the given time range:
 .. code-block:: python
 		
    >>> from qlib.data import D
-   >>> instruments = D.instruments(market='csi500')
+   >>> instruments = D.instruments(market='csi300')
    >>> D.list_instruments(instruments=instruments, start_time='2010-01-01', end_time='2017-12-31', as_list=True)[:6]
-   ['SH600000', 'SH600003', 'SH600004', 'SH600005', 'SH600006', 'SH600007']
+
 
 Load dynamic instruments from a base market according to a name filter
 
@@ -58,9 +58,8 @@ Load dynamic instruments from a base market according to a name filter
    >>> from qlib.data import D
    >>> from qlib.data.filter import NameDFilter
    >>> nameDFilter = NameDFilter(name_rule_re='SH[0-9]{4}55')
-   >>> instruments = D.instruments(market='csi500', filter_pipe=[nameDFilter])
+   >>> instruments = D.instruments(market='csi300', filter_pipe=[nameDFilter])
    >>> D.list_instruments(instruments=instruments, start_time='2015-01-01', end_time='2016-02-15', as_list=True)
-   ['SH600655', 'SH600755', 'SH603355', 'SH603555']
 
 Load dynamic instruments from a base market according to an expression filter
 
@@ -69,9 +68,8 @@ Load dynamic instruments from a base market according to an expression filter
    >>> from qlib.data import D
    >>> from qlib.data.filter import ExpressionDFilter
    >>> expressionDFilter = ExpressionDFilter(rule_expression='$close>100')
-   >>> instruments = D.instruments(market='csi500', filter_pipe=[expressionDFilter])
+   >>> instruments = D.instruments(market='csi300', filter_pipe=[expressionDFilter])
    >>> D.list_instruments(instruments=instruments, start_time='2015-01-01', end_time='2016-02-15', as_list=True)
-   ['SH600601', 'SH600651', 'SH600654']
 
 To know more about how to use the filter or how to build one's own filter, go to API Reference: `filter API <../reference/api.html#filter>`_
 
@@ -112,7 +110,7 @@ Load features of certain stockpool in given time range:
    >>> from qlib.data.filter import NameDFilter, ExpressionDFilter
    >>> nameDFilter = NameDFilter(name_rule_re='SH[0-9]{4}55')
    >>> expressionDFilter = ExpressionDFilter(rule_expression='($close/$factor)>100')
-   >>> instruments = D.instruments(market='csi500', filter_pipe=[nameDFilter, expressionDFilter])
+   >>> instruments = D.instruments(market='csi300', filter_pipe=[nameDFilter, expressionDFilter])
    >>> fields = ['$close', '$volume', 'Ref($close, 1)', 'Mean($close, 3)', '$high-$low']
    >>> D.features(instruments, fields, start_time='2010-01-01', end_time='2017-12-31', freq='day').head()
 
