@@ -66,6 +66,7 @@ def init(default_conf="client", **kwargs):
 
     # check path if server/local
     if re.match("^[^/ ]+:.+", C["provider_uri"]) is None:
+        C["provider_uri"] = str(Path(C["provider_uri"]).expanduser().resolve())
         if not os.path.exists(C["provider_uri"]):
             if C["auto_mount"]:
                 LOG.error(
