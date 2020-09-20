@@ -95,16 +95,17 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
   
     ```bash
 
-    sub_bench       mean    0.000953
-                    std     0.004688
-                    annual  0.240123
-                    sharpe  3.226878
-                    mdd    -0.064588
-    sub_cost        mean    0.000718
-                    std     0.004694
-                    annual  0.181003
-                    sharpe  2.428964
-                    mdd    -0.072977
+                          risk
+    sub_bench mean    0.000662
+              std     0.004487
+              annual  0.166720
+              sharpe  2.340526
+              mdd    -0.080516
+    sub_cost  mean    0.000577
+              std     0.004482
+              annual  0.145392
+              sharpe  2.043494
+              mdd    -0.083584
     ```
     See the full documnents for [Use _Estimator_ to Start An Experiment](TODO:URL).
 

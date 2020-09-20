@@ -137,16 +137,17 @@ class Estimator(object):
         # 2. Normal Backtest.
         report_normal, positions_normal = self._normal_backtest(pred)
         # 3. Long-Short Backtest.
-        long_short_reports = self._long_short_backtest(pred)
+        # Deprecated
+        # long_short_reports = self._long_short_backtest(pred)
         # 4. Analyze
-        analysis_df = self._analyze(report_normal, long_short_reports)
+        analysis_df = self._analyze(report_normal)
         # 5. Save.
         self._save_backtest_result(
             pred,
             analysis_df,
             positions_normal,
             report_normal,
-            long_short_reports,
+            # long_short_reports,
             performance,
         )
         return analysis_df
@@ -174,13 +175,13 @@ class Estimator(object):
         return long_short_reports
 
     @staticmethod
-    def _analyze(report_normal, long_short_reports):
+    def _analyze(report_normal):
         TimeInspector.set_time_mark()
 
         analysis = dict()
-        analysis["pred_long"] = risk_analysis(long_short_reports["long"])
-        analysis["pred_short"] = risk_analysis(long_short_reports["short"])
-        analysis["pred_long_short"] = risk_analysis(long_short_reports["long_short"])
+        # analysis["pred_long"] = risk_analysis(long_short_reports["long"])
+        # analysis["pred_short"] = risk_analysis(long_short_reports["short"])
+        # analysis["pred_long_short"] = risk_analysis(long_short_reports["long_short"])
         analysis["sub_bench"] = risk_analysis(report_normal["return"] - report_normal["bench"])
         analysis["sub_cost"] = risk_analysis(report_normal["return"] - report_normal["bench"] - report_normal["cost"])
         analysis_df = pd.concat(analysis)  # type: pd.DataFrame
@@ -189,7 +190,7 @@ class Estimator(object):
         )
         return analysis_df
 
-    def _save_backtest_result(self, pred, analysis, positions, report_normal, long_short_reports, performance):
+    def _save_backtest_result(self, pred, analysis, positions, report_normal, performance):
         # 1. Result dir.
         result_dir = os.path.join(self.config_manager.ex_config.tmp_run_dir, "result")
         if not os.path.exists(result_dir):
@@ -230,15 +231,16 @@ class Estimator(object):
         TimeInspector.log_cost_time("Finished saving report_normal.pkl to: {}".format(report_normal_pkl_path))
 
         # 6. Report long short.
-        for k, name in zip(
-            ["long", "short", "long_short"],
-            ["report_long.pkl", "report_short.pkl", "report_long_short.pkl"],
-        ):
-            TimeInspector.set_time_mark()
-            pkl_path = os.path.join(result_dir, name)
-            long_short_reports[k].to_pickle(pkl_path)
-            self.ex.add_artifact(pkl_path)
-            TimeInspector.log_cost_time("Finished saving {} to: {}".format(name, pkl_path))
+        # Deprecated
+        # for k, name in zip(
+        #     ["long", "short", "long_short"],
+        #     ["report_long.pkl", "report_short.pkl", "report_long_short.pkl"],
+        # ):
+        #     TimeInspector.set_time_mark()
+        #     pkl_path = os.path.join(result_dir, name)
+        #     long_short_reports[k].to_pickle(pkl_path)
+        #     self.ex.add_artifact(pkl_path)
+        #     TimeInspector.log_cost_time("Finished saving {} to: {}".format(name, pkl_path))
 
         # 7. Origin test label.
         TimeInspector.set_time_mark()

@@ -17,7 +17,6 @@ from qlib.contrib.estimator.handler import QLibDataHandlerClose
 from qlib.contrib.strategy.strategy import TopkAmountStrategy
 from qlib.contrib.evaluate import (
     backtest as normal_backtest,
-    long_short_backtest,
     risk_analysis,
 )
 from qlib.utils import exists_qlib_data
@@ -116,20 +115,14 @@ def backtest(pred):
 
     positions_normal: dict
 
-    long_short_reports: dict
-
     """
     strategy = TopkAmountStrategy(**STRATEGY_CONFIG)
     _report_normal, _positions_normal = normal_backtest(pred, strategy=strategy, **BACKTEST_CONFIG)
-    _long_short_reports = long_short_backtest(pred, topk=50)
-    return _report_normal, _positions_normal, _long_short_reports
+    return _report_normal, _positions_normal
 
 
-def analyze(report_normal, long_short_reports):
+def analyze(report_normal):
     _analysis = dict()
-    _analysis["pred_long"] = risk_analysis(long_short_reports["long"])
-    _analysis["pred_short"] = risk_analysis(long_short_reports["short"])
-    _analysis["pred_long_short"] = risk_analysis(long_short_reports["long_short"])
     _analysis["sub_bench"] = risk_analysis(report_normal["return"] - report_normal["bench"])
     _analysis["sub_cost"] = risk_analysis(report_normal["return"] - report_normal["bench"] - report_normal["cost"])
     analysis_df = pd.concat(_analysis)  # type: pd.DataFrame
@@ -141,29 +134,28 @@ class TestAllFlow(unittest.TestCase):
     PRED_SCORE = None
     REPORT_NORMAL = None
     POSITIONS = None
-    LONG_SHORT_REPORTS = None
 
     @classmethod
     def setUpClass(cls) -> None:
         # use default data
-        mount_path = "~/.qlib/qlib_data/cn_data"  # target_dir
-        if not exists_qlib_data(mount_path):
-            print(f"Qlib data is not found in {mount_path}")
+        provier_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
+        if not exists_qlib_data(provier_uri):
+            print(f"Qlib data is not found in {provier_uri}")
             sys.path.append(str(Path(__file__).resolve().parent.parent.joinpath("scripts")))
             from get_data import GetData
 
-            GetData().qlib_data_cn(mount_path)
-        qlib.init(mount_path=mount_path, region=REG_CN)
+            GetData().qlib_data_cn(provier_uri)
+        qlib.init(provier_uri=provier_uri, region=REG_CN)
 
     def test_0_train(self):
         TestAllFlow.PRED_SCORE, model_pearsonr = train()
         self.assertGreaterEqual(model_pearsonr["model_pearsonr"], 0, "train failed")
 
     def test_1_backtest(self):
-        TestAllFlow.REPORT_NORMAL, TestAllFlow.POSITIONS, TestAllFlow.LONG_SHORT_REPORTS = backtest(
+        TestAllFlow.REPORT_NORMAL, TestAllFlow.POSITIONS = backtest(
             TestAllFlow.PRED_SCORE
         )
-        analyze_df = analyze(TestAllFlow.REPORT_NORMAL, TestAllFlow.LONG_SHORT_REPORTS)
+        analyze_df = analyze(TestAllFlow.REPORT_NORMAL)
         self.assertGreaterEqual(
             analyze_df.loc(axis=0)["sub_cost", "annual"].values[0], 0.10, "backtest failed",
         )

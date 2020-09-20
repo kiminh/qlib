@@ -41,7 +41,7 @@ If users use ``Qlib`` in china-stock mode, china-stock data is required. The scr
     .. code-block:: python
 
         from qlib.config import REG_CN
-        qlib.init(mount_path='~/.qlib/qlib_data/cn_data', region=REG_CN)
+        qlib.init(provider_uri='~/.qlib/qlib_data/cn_data', region=REG_CN)
         
 
 US-Stock Market Mode
@@ -70,7 +70,7 @@ If users use ``Qlib`` in US-stock mode, US-stock data is required. ``Qlib`` does
     .. code-block:: python
 
         from qlib.config import REG_US
-        qlib.init(mount_path='~/.qlib/qlib_data/us_data', region=REG_US)
+        qlib.init(provider_uri='~/.qlib/qlib_data/us_data', region=REG_US)
         
 
 Please refer to `Script API <../reference/api.html>`_ for more details.

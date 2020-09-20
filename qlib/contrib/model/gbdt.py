@@ -45,9 +45,6 @@ class LGBModel(Model):
         evals_result=dict(),
         **kwargs
     ):
-        #print("input featrue", x_train)
-        #print("input label", y_train)
-        #print("input weight", w_train)
         # Lightgbm need 1D array as its label
         if y_train.values.ndim == 2 and y_train.values.shape[1] == 1:
             y_train_1d, y_valid_1d = np.squeeze(y_train.values), np.squeeze(y_valid.values)
@@ -74,7 +71,6 @@ class LGBModel(Model):
         evals_result["valid"] = list(evals_result["valid"].values())[0]
 
     def predict(self, x_test):
-        print("predict test", x_test)
         if self._model is None:
             raise ValueError("model is not fitted yet!")
         return self._model.predict(x_test.values)

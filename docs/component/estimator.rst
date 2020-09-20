@@ -87,11 +87,9 @@ First, Write a simple configuration file as following,
         open_cost: 0.0005
         close_cost: 0.0015
         min_cost: 5
-      long_short_backtest_args:
-        topk: 50
     qlib_data:
       # when testing, please modify the following parameters according to the specific environment
-      mount_path: "~/.qlib/qlib_data/cn_data"
+      provider_uri: "~/.qlib/qlib_data/cn_data"
       region: "cn"
 
 
@@ -570,10 +568,10 @@ The `qlib_data` field describes the parameters of qlib initialization.
 
     qlib_data:
       # when testing, please modify the following parameters according to the specific environment
-      mount_path: "~/.qlib/qlib_data/cn_data"
+      provider_uri: "~/.qlib/qlib_data/cn_data"
       region: "cn"
     
-- `mount_path`
+- `provider_uri`
     The local directory where the data loaded by 'get_data.py' is stored.
 - `region`
     - If region == ``qlib.config.REG_CN``, 'qlib' will be initialized in US-stock mode. 
@@ -618,7 +616,7 @@ Users can check the experiment results from file storage directly, or check the 
     
     .. note::
         Currently supported fields:
-            ['model', 'analysis', 'positions', 'report_normal', 'report_long', 'report_short', 'report_long_short', 'pred', 'task_config', 'label']
+            ['model', 'analysis', 'positions', 'report_normal', 'pred', 'task_config', 'label']
 
     .. code-block:: JSON
 
@@ -627,7 +625,6 @@ Users can check the experiment results from file storage directly, or check the 
             'pred': pred_df,
             'positions': positions_dic,
             'report_normal': report_normal_df,
-            'report_long_short': report_long_short_df
         }
 
 
@@ -659,17 +656,17 @@ Here is a simple example of `FileFetcher`, which could fetch files from `file_st
 
     >>> print(f.get_experiment('test_experiment', '1'))
 
-                            risk
-    sub_bench       mean    0.000953
-                    std     0.004688
-                    annual  0.240123
-                    ir      3.226878
-                    mdd    -0.064588
-    sub_cost        mean    0.000718
-                    std     0.004694
-                    annual  0.181003
-                    ir      2.428964
-                    mdd    -0.072977
+                          risk
+    sub_bench mean    0.000662
+              std     0.004487
+              annual  0.166720
+              sharpe  2.340526
+              mdd    -0.080516
+    sub_cost  mean    0.000577
+              std     0.004482
+              annual  0.145392
+              sharpe  2.043494
+              mdd    -0.083584
 
 If users use mongo observer when training, they should initialize their fether with mongo_url
 

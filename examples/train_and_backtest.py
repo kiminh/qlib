@@ -20,15 +20,15 @@ from qlib.utils import exists_qlib_data
 if __name__ == "__main__":
 
     # use default data
-    mount_path = "~/.qlib/qlib_data/cn_data"  # target_dir
-    if not exists_qlib_data(mount_path):
-        print(f"Qlib data is not found in {mount_path}")
+    provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
+    if not exists_qlib_data(provider_uri):
+        print(f"Qlib data is not found in {provider_uri}")
         sys.path.append(str(Path(__file__).resolve().parent.parent.joinpath("scripts")))
         from get_data import GetData
 
-        GetData().qlib_data_cn(mount_path)
+        GetData().qlib_data_cn(provider_uri)
 
-    qlib.init(mount_path=mount_path, region=REG_CN)
+    qlib.init(provider_uri=provider_uri, region=REG_CN, redis_port=1111)
 
     MARKET = "CSI300"
     BENCHMARK = "SH000300"
