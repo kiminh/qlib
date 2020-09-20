@@ -141,8 +141,7 @@ class Fetcher(object):
         :param fields: list
             Experiment result fields, if fields is None, will get all fields.
                 Currently supported fields:
-                    ['model', 'analysis', 'positions', 'report_normal', 'report_long', 'report_short',
-                    'report_long_short', 'pred', 'task_config', 'label']
+                    ['model', 'analysis', 'positions', 'report_normal', 'pred', 'task_config', 'label']
         :return: dict
         """
         fields = copy.copy(fields)

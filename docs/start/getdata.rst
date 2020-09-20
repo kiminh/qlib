@@ -23,7 +23,7 @@ It is recommended to use the following code to initialize qlib:
 .. code-block:: python
 
     >>> import qlib
-    >>> qlib.init(mount_path='~/.qlib/qlib_data/cn_data')
+    >>> qlib.init(provider_uri='~/.qlib/qlib_data/cn_data')
 
 
 Load trading calendar with the given time range and frequency:

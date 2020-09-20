@@ -16,7 +16,6 @@ import importlib
 import traceback
 import numpy as np
 import pandas as pd
-from pathlib import Path
 from multiprocessing import Pool
 
 from .cache import H
@@ -569,11 +568,10 @@ class LocalInstrumentProvider(InstrumentProvider):
     @property
     def _uri_inst(self):
         """Instrument file uri."""
-        return os.path.join(str(Path(C.provider_uri).expanduser().resolve()), "instruments", "{}.txt")
+        return os.path.join(C.provider_uri, "instruments", "{}.txt")
 
     def _load_instruments(self, market):
         fname = self._uri_inst.format(market)
-        print(fname)
         if not os.path.exists(fname):
             raise ValueError("instruments not exists for market " + market)
         _instruments = dict()

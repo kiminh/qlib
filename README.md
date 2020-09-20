@@ -95,6 +95,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
   
     ```bash
 
+<<<<<<< HEAD
     sub_bench       mean    0.000953
                     std     0.004688
                     annual  0.240123
@@ -105,19 +106,46 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
                     annual  0.181003
                     sharpe  2.428964
                     mdd    -0.072977
+=======
+                          risk
+    sub_bench mean    0.000662
+              std     0.004487
+              annual  0.166720
+              sharpe  2.340526
+              mdd    -0.080516
+    sub_cost  mean    0.000577
+              std     0.004482
+              annual  0.145392
+              sharpe  2.043494
+              mdd    -0.083584
+>>>>>>> e01553f66e13e0528b67a262495812dee72f4436
     ```
-    See the full documnents for [Use _Estimator_ to Start An Experiment](TODO:URL).
+    See the full documents for [Use _Estimator_ to Start An Experiment](TODO:URL).
 
 2. Analysis
 
     Run `examples/estimator/analyze_from_estimator.ipynb` in `jupyter notebook`
     1.  forecasting signal analysis
-        - Model Performance
-        ![Model Performance](docs/_static/img/model_performance.png)
+        - Cumulative Return
+
+        ![Cumulative Return](docs/_static/img/analysis/analysis_model_cumulative_return.png)
+        ![long_short](docs/_static/img/analysis/analysis_model_long_short.png)
+        - Information Coefficient(IC)
+
+        ![Information Coefficient](docs/_static/img/analysis/analysis_model_IC.png)        
+        ![Monthy IC](docs/_static/img/analysis/analysis_model_monthy_IC.png)        
+        ![IC](docs/_static/img/analysis/analysis_model_NDQ.png)
+        - Auto Correlation
+
+        ![Auto Correlation](docs/_static/img/analysis/analysis_model_auto_correlation.png)
+
+        
+
 
     2.  portfolio analysis
         - Report
-        ![Report](docs/_static/img/report.png)
+  
+        ![Report](docs/_static/img/analysis/report.png)
         <!-- 
         - Score IC
         ![Score IC](docs/_static/img/score_ic.png)
@@ -145,6 +173,8 @@ conda install sphinx sphinx_rtd_theme -y
 make html
 ```
 You can also view the [latest document](TODO_URL) online directly.
+
+The roadmap is managed as a [github project](https://github.com/microsoft/qlib/projects/1).
 
 
 

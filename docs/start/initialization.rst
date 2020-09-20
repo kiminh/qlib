@@ -26,17 +26,17 @@ Please execute the following process to initialize ``Qlib``.
         import qlib
         # region in [REG_CN, REG_US]
         from qlib.config import REG_CN
-        mount_path = "~/.qlib/qlib_data/cn_data"  # target_dir
-        qlib.init(mount_path=mount_path, region=REG_CN)
+        provider_uri = "~/.qlib/qlib_data/cn_data"  # target_dir
+        qlib.init(provider_uri=provider_uri, region=REG_CN)
     
 
 
 Parameters
 -------------------
 
-In fact, in addition to `mount_path` and `region`, `qlib.init` has other parameters. The following are all the parameters of `qlib.init`:
+In fact, in addition to `provider_uri` and `region`, `qlib.init` has other parameters. The following are all the parameters of `qlib.init`:
 
-- `mount_path`
+- `provider_uri`
     Type: str. The local directory where the data loaded by ``get_data.py`` is stored.
 - `region`
     Type: str, optional parameter(default: ``qlib.config.REG_CN``).
@@ -53,7 +53,11 @@ In fact, in addition to `mount_path` and `region`, `qlib.init` has other paramet
 
     .. note:: 
         
+<<<<<<< HEAD
         The value of `region` should be aligned with the data stored in `mount_path`. Currently, ``scripts/get_data.py`` only provides China stock market data. If users want to use the US stock market data, they should prepare their own US-stock data in `mount_path` and switch to US-stock mode.
+=======
+        The value of `region` should be aligned with the data stored in `provider_uri`. Currently, ``scripts/get_data.py`` only provides China stock market data. If users want to use the US stock market data, they should prepare their own US-stock data in `provider_uri` and switch to US-stock mode.
+>>>>>>> e01553f66e13e0528b67a262495812dee72f4436
 
     .. note::
         
