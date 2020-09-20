@@ -53,7 +53,7 @@ First, Write a simple configuration file as following,
         num_leaves: 210
         num_threads: 20
     data:
-      class: QLibDataHandlerV1
+      class: QLibDataHandlerClose
       args:
         dropna_label: True
       filter:
@@ -79,7 +79,7 @@ First, Write a simple configuration file as following,
         limit_threshold: 0.095
         account: 100000000
         benchmark: SH000905
-        deal_price: vwap
+        deal_price: close
         open_cost: 0.0005
         close_cost: 0.0015
         min_cost: 5
@@ -284,7 +284,7 @@ Users can use the specified data handler by config as follows.
 .. code-block:: YAML
 
     data:
-        class: QLibDataHandlerV1
+        class: QLibDataHandlerClose
         args:
             start_date: 2005-01-01
             end_date: 2018-04-30  
@@ -520,7 +520,7 @@ Users can specify `backtest` through a config file, for example:
             topk: 50
             benchmark: SH000905
             account: 500000
-            deal_price: vwap
+            deal_price: close
             min_cost: 5
             subscribe_fields:
               - $close
