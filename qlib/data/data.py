@@ -572,7 +572,6 @@ class LocalInstrumentProvider(InstrumentProvider):
 
     def _load_instruments(self, market):
         fname = self._uri_inst.format(market)
-        print(fname)
         if not os.path.exists(fname):
             raise ValueError("instruments not exists for market " + market)
         _instruments = dict()

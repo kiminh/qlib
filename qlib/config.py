@@ -92,9 +92,9 @@ _default_server_config = {
 
 _default_client_config = {
     # data provider config
-    "calendar_provider": {"class": "LocalCalendarProvider", "kwargs": {"remote": True}},
+    "calendar_provider": "LocalCalendarProvider",
     "instrument_provider": "LocalInstrumentProvider",
-    "feature_provider": {"class": "LocalFeatureProvider", "kwargs": {"remote": True}},
+    "feature_provider": "LocalFeatureProvider",
     "expression_provider": "LocalExpressionProvider",
     "dataset_provider": "LocalDatasetProvider",
     "provider": "LocalProvider",
@@ -102,8 +102,8 @@ _default_client_config = {
     "provider_uri": "~/.qlib/qlib_data/cn_data",
     # cache
     # Using parameter 'remote' to announce the client is using server_cache, and the writing access will be disabled.
-    "expression_cache": {"class": "ServerExpressionCache", "kwargs": {"remote": True}},
-    "dataset_cache": {"class": "ServerDatasetCache", "kwargs": {"remote": True}},
+    "expression_cache": "ServerExpressionCache",
+    "dataset_cache": "ServerDatasetCache",
     "calendar_cache": None,
     # client config
     "kernels": 16,
