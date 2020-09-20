@@ -8,10 +8,8 @@ Introduction
 ===================
 The components in :ref:`framework` is designed in a loosely-coupled way. User could build his own Quant research workflow with these components like `Example <http://TODO_URL>`_
 
-Besides, ``Qlib`` provides more user-friendly interface named ``Estimator`` to automatically run the whole workflow defined by a config.
-The automatic workflow includes the the following process:
-
-By ``Estimator``, user can start an ``experiment``, which has the following process:
+Besides, ``Qlib`` provides more user-friendly interfaces named ``Estimator`` to automatically run the whole workflow defined by a config.  A concrete execution of the whole workflow is called an experiment.
+With ``Estimator``, user can easily run an ``experiment``, which includes the following steps:
 
 - Data
   - Loading
@@ -21,8 +19,6 @@ By ``Estimator``, user can start an ``experiment``, which has the following proc
   - Training and inference(static or rolling)
   - Saving & loading
 - Evaluation(Back-testing)
-
-A concrete execution of the whole workflow is called an experiment.
 
 For each experiment, ``Qlib`` will capture the details of model training, performance evalution results and basic infomation(e.g. names, ids). The captured data will be stored in backend-storge(disk or database).
 

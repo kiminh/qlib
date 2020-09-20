@@ -6,7 +6,7 @@ Data Layer: Data Framework&Usage
 Introduction
 ============================
 
-``Qlib Data`` can be used to construct data sets from raw data, and the ``Qlib Data`` framework includes four layers as follows.
+``Qlib Data`` can be used to construct datasets from raw data, and the ``Qlib Data`` framework includes four layers as follows.
 
 - Raw Data
 - Data API

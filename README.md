@@ -107,7 +107,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
               sharpe  2.043494
               mdd    -0.083584
     ```
-    See the full documnents for [Use _Estimator_ to Start An Experiment](TODO:URL).
+    See the full documents for [Use _Estimator_ to Start An Experiment](TODO:URL).
 
 2. Analysis
 
@@ -160,6 +160,8 @@ conda install sphinx sphinx_rtd_theme -y
 make html
 ```
 You can also view the [latest document](TODO_URL) online directly.
+
+The roadmap is managed as a [github project](https://github.com/microsoft/qlib/projects/1).
 
 
 
