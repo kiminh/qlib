@@ -6,7 +6,8 @@ Estimator: Workflow Management
 
 Introduction
 ===================
-The components in :ref:`framework` is designed in a loosely-coupled way. User could build his own Quant research workflow with these components like `Example <http://TODO_URL>`_
+
+The components in :ref:`framework` is designed in a loosely-coupled way. User could build their own Quant research workflow with these components like `Example <http://TODO_URL>`_
 
 Besides, ``Qlib`` provides more user-friendly interfaces named ``Estimator`` to automatically run the whole workflow defined by a config.  A concrete execution of the whole workflow is called an experiment.
 With ``Estimator``, user can easily run an ``experiment``, which includes the following steps:

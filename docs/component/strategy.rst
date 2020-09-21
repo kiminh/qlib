@@ -7,7 +7,9 @@ Interday Strategy: Portfolio Management
 Introduction
 ===================
 
-By ``Strategy``, users can adopt different trading strategies, which means that users can use different algorithms to generate investment portfolios based on the predicted scores of the ``Model`` module.
+.. TDOD:: Rewrite the part
+
+With ``Strategy``, users can adopt different trading strategies, which means that users can use different algorithms to generate investment portfolios based on the predicted scores of the ``Model`` module.
 
 ``Qlib`` provides several trading strategy classes, users can customize strategies according to their own needs also.
 

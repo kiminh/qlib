@@ -5,7 +5,9 @@ Interday Model: Model Training & Prediction
 Introduction
 ===================
 
-By ``Model``, users can use known data and features to train the model and make the future prediction about stocks.
+.. TDOD:: Rewrite the part
+
+With ``Model``, users can use known data and features to train the model and make the future prediction about stocks.
 
 Interface
 ===================

@@ -53,11 +53,7 @@ In fact, in addition to `provider_uri` and `region`, `qlib.init` has other param
 
     .. note:: 
         
-<<<<<<< HEAD
-        The value of `region` should be aligned with the data stored in `mount_path`. Currently, ``scripts/get_data.py`` only provides China stock market data. If users want to use the US stock market data, they should prepare their own US-stock data in `mount_path` and switch to US-stock mode.
-=======
         The value of `region` should be aligned with the data stored in `provider_uri`. Currently, ``scripts/get_data.py`` only provides China stock market data. If users want to use the US stock market data, they should prepare their own US-stock data in `provider_uri` and switch to US-stock mode.
->>>>>>> e01553f66e13e0528b67a262495812dee72f4436
 
     .. note::
         
