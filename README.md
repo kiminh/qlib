@@ -95,6 +95,18 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
   
     ```bash
 
+<<<<<<< HEAD
+    sub_bench       mean    0.000953
+                    std     0.004688
+                    annual  0.240123
+                    sharpe  3.226878
+                    mdd    -0.064588
+    sub_cost        mean    0.000718
+                    std     0.004694
+                    annual  0.181003
+                    sharpe  2.428964
+                    mdd    -0.072977
+=======
                           risk
     sub_bench mean    0.000662
               std     0.004487
@@ -106,6 +118,7 @@ Qlib provides a tool named `estimator` to run whole workflow automatically(inclu
               annual  0.145392
               sharpe  2.043494
               mdd    -0.083584
+>>>>>>> e01553f66e13e0528b67a262495812dee72f4436
     ```
     See the full documents for [Use _Estimator_ to Start An Experiment](TODO:URL).
 

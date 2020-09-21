@@ -366,7 +366,6 @@ Qlib support custom data handler, but it must be a subclass of the ``qlib.contri
         args:
             start_date: 2005-01-01
             end_date: 2018-04-30  
-            feature_label_config: /data/qlib/feature_config/feature_config.yaml
 
 The class `SomeDataHandler` should be in the module `custom_data_handler`, and ``Qlib`` could parse the `module_path` to load the class.
 
@@ -398,12 +397,12 @@ Qlib have provided two implemented trainer,
     The rolling trainer will use the rolling iterator of the data processor to split data for rolling training.
 
 
-Users can specify `trainer` through the configuration file:
+Users can specify `trainer` with the configuration file:
 
 .. code-block:: YAML
 
     trainer:
-        class: StaticTrainer // or RollingTrainer
+        class: StaticTrainer # or RollingTrainer
         args:
             rolling_period: 360
             train_start_date: 2005-01-01
@@ -414,7 +413,7 @@ Users can specify `trainer` through the configuration file:
             test_end_date: 2017-07-31
 
 - `class`   
-    Trainer class, trt should be a subclass of `qlib.contrib.estimator.trainer.BaseTrainer`, and need to implement three important interfaces, the default value is `StaticTrainer`.
+    Trainer class, which should be a subclass of `qlib.contrib.estimator.trainer.BaseTrainer`, and needs to implement three important interfaces, the default value is `StaticTrainer`.
 
 - `module_path`    
     The module path, str type, absolute url is also supported, indicates the path of the trainer class implementation.

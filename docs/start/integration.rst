@@ -63,7 +63,8 @@ The Custom models need to inherit `qlib.contrib.model.base.Model <../reference/a
             )
 
 - Override the `predict` method
-    - The parameters include the features of the test data and return the prediction labels
+    - The parameters include the test features
+    - Return the prediction score
     - Please refer to `qlib.contrib.model.base.Model <../reference/api.html#module-qlib.contrib.model.base>`_ for the parameter types of the fit method
     - Code Example:In the following example, user need to user dnn to predict the label(such as 'preds') of test data 'x_test' and return it.
     .. code-block:: Python
@@ -74,7 +75,8 @@ The Custom models need to inherit `qlib.contrib.model.base.Model <../reference/a
             return self._model.predict(x_test.values)
 
 - Override the `score` method
-    - The parameters include the features and label of the test data, and the return loss whose type is passed in the __init__ method
+    - The parameters include the test features and test labels
+    - Return the evaluation score of model. It's recommended to adopt the loss between labels and prediction score.
     - Code Example:In the following example, user need to calculate the weighted loss with test data 'x_test',  test label 'y_test' and the weight 'w_test'.
     .. code-block:: Python
 
