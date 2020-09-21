@@ -1,4 +1,8 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import re
+import sys
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -11,12 +15,12 @@ from lxml import etree
 from loguru import logger
 from yahooquery import Ticker
 
-from scripts.dump_bin import DumpData
+CUR_DIR = Path(__file__).resolve().parent
+sys.path.append(str(CUR_DIR.parent.parent))
+from dump_bin import DumpData
 
 SYMBOLS_URL = "http://app.finance.ifeng.com/hq/list.php?type=stock_a&class={s_type}"
 CSI300_BENCH_URL = "http://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.000300&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&klt=101&fqt=0&beg=19900101&end=20220101"
-
-CUR_DIR = Path(__file__).resolve().parent
 
 
 class YahooCollector:
@@ -180,6 +184,37 @@ class Run:
                 for _ in worker.map(_normalize, file_list):
                     p_bar.update()
 
+    def manual_adj_data(self):
+        """manual adjust data
+
+        Examples
+        --------
+            $ python collector.py manual_adj_data --normalize_dir ~/.qlib/stock_data/normalize
+
+        """
+        def _adj(file_path: Path):
+            df = pd.read_csv(file_path)
+            df = df.loc[:, ["open", "close", "high", "low", "volume", "change", "factor"]]
+            df.sort_values("date", inplace=True)
+            df = df.set_index("date")
+            df = df.loc[df.first_valid_index():]
+            _close = df["close"].iloc[0]
+            for _col in df.columns:
+                if _col == "volume":
+                    df[_col] = df[_col] * _close
+                elif _col != "change":
+                    df[_col] = df[_col] / _close
+                else:
+                    pass
+            df.reset_index().to_csv(self.normalize_dir.joinpath(file_path.name), index=False)
+
+        with ThreadPoolExecutor(max_workers=self.max_workers) as worker:
+            file_list = list(self.normalize_dir.glob("*.csv"))
+            with tqdm(total=len(file_list)) as p_bar:
+                for _ in worker.map(_adj, file_list):
+                    p_bar.update()
+
+
     def dump_data(self):
         """dump yahoo data
 
@@ -211,6 +246,7 @@ class Run:
         """
         self.download_data()
         self.normalize_data()
+        self.manual_adj_data()
         self.dump_data()
 
 

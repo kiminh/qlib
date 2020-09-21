@@ -16,8 +16,8 @@ The ``Backtest`` module could be used to test models and strategies. By ``Backte
 Example
 ===========================
 
-Users need to generate a score file(a pandas DataFrame) with MultiIndex<instrument, datetime> and a `score` column. And users need to assign a strategy used in backtest, if strategy is not assigned,
-a `TopkAmountStrategy` strategy with(topk=20, buffer_margin=150, risk_degree=0.95, limit_threshold=0.0095) will be used.
+Users need to generate a prediction score(a pandas DataFrame) with MultiIndex<instrument, datetime> and a `score` column. And users need to assign a strategy used in backtest, if strategy is not assigned,
+a `TopkAmountStrategy` strategy with `(topk=20, buffer_margin=150, risk_degree=0.95, limit_threshold=0.0095)` will be used.
 If ``Strategy`` module is not user's interested part, `TopkAmountStrategy` is enough. 
 
 The simple example with default strategy is as follows.
@@ -25,17 +25,20 @@ The simple example with default strategy is as follows.
 .. code-block:: python
 
     from qlib.contrib.evaluate import backtest
-    report, positions = backtest(pred_test, topk=50, margin=0.5, verbose=False, limit_threshold=0.0095)
+    # pred_score is the prediction score
+    report, positions = backtest(pred_score, topk=50, margin=0.5, verbose=False, limit_threshold=0.0095)
 
 To know more about backtesting with specific strategy, please refer to `Strategy <strategy.html>`_.
 
-Score File
---------------
+To know more about the prediction score `pred_score` output by ``Model``, please refer to `Interday Model: Model Training & Prediction <model.html>`_.
 
-The score file is a pandas DataFrame, its index is <instrument(str), datetime(pd.Timestamp)> and it must
-contains a "score" column.
+Prediction Score
+-----------------
 
-A score file sample is shown as follows.
+The prediction score is a pandas DataFrame. Its index is <instrument(str), datetime(pd.Timestamp)> and it must
+contains a `score` column.
+
+A prediction sample is shown as follows.
 
 .. code-block:: python
 
@@ -52,7 +55,7 @@ A score file sample is shown as follows.
     SH603133   2019-04-30 -0.302460
     SZ300760   2019-04-30 -0.126383
 
-``Model`` module can produce the score file, please refer to `Model <model.html>`_.
+``Model`` module can make predictions, please refer to `Model <model.html>`_.
 
 Backtest Result
 ------------------
@@ -61,31 +64,31 @@ The backtest results are in the following form:
 
 .. code-block:: python
 
-    sub_bench       mean    0.000953
-                    std     0.004688
-                    annual  0.240123
-                    ir      3.226878
-                    mdd    -0.064588
-    sub_cost        mean    0.000718
-                    std     0.004694
-                    annual  0.181003
-                    ir      2.428964
-                    mdd    -0.072977
+    sub_bench mean    0.000662
+              std     0.004487
+              annual  0.166720
+              sharpe  2.340526
+              mdd    -0.080516
+    sub_cost  mean    0.000577
+              std     0.004482
+              annual  0.145392
+              sharpe  2.043494
+              mdd    -0.083584
 
 - `sub_bench`
-    Income without deduction of fees
+    Returns of the portfolio without deduction of fees
 
 - `sub_cost`
-    Income with deduction of fees
+    Returns of the portfolio with deduction of fees
 
 - `mean`
-    Mean value of the income sequence(difference sequence of assets).
+    Mean value of the returns sequence(difference sequence of assets).
 
 - `std`
-    Standard deviation of the income sequence(difference sequence of assets).
+    Standard deviation of the returns sequence(difference sequence of assets).
 
 - `annual`
-    Average annualized income of the portfolio.
+    Average annualized returns of the portfolio.
 
 -  `ir`
     Information Ratio, please refer to `Information Ratio – IR <https://www.investopedia.com/terms/i/informationratio.asp>`_.

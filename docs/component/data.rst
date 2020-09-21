@@ -6,7 +6,7 @@ Data Layer: Data Framework&Usage
 Introduction
 ============================
 
-``Qlib Data`` can be used to construct datasets from raw data, and the ``Qlib Data`` framework includes four layers as follows.
+``Qlib Data`` can be used to construct datasets from raw data, and the ``Qlib Data`` framework includes four levels as follows.
 
 - Raw Data
 - Data API
@@ -41,7 +41,7 @@ If users use ``Qlib`` in china-stock mode, china-stock data is required. The scr
     .. code-block:: python
 
         from qlib.config import REG_CN
-        qlib.init(mount_path='~/.qlib/qlib_data/cn_data', region=REG_CN)
+        qlib.init(provider_uri='~/.qlib/qlib_data/cn_data', region=REG_CN)
         
 
 US-Stock Market Mode
@@ -70,7 +70,7 @@ If users use ``Qlib`` in US-stock mode, US-stock data is required. ``Qlib`` does
     .. code-block:: python
 
         from qlib.config import REG_US
-        qlib.init(mount_path='~/.qlib/qlib_data/us_data', region=REG_US)
+        qlib.init(provider_uri='~/.qlib/qlib_data/us_data', region=REG_US)
         
 
 Please refer to `Script API <../reference/api.html>`_ for more details.
@@ -81,6 +81,20 @@ Data API
 Data Retrieval
 ---------------
 Users can use APIs in ``qlib.data`` to retrieve data, please refer to `Data Retrieval <../start/getdata.html>`_.
+
+Feature
+------------------
+
+``Qlib`` provides `Feature` and `ExpressionOps` to fetch the features according to users' need.
+
+- `Feature`
+    Load data from data provider.
+
+- `ExpressionOps`
+    `ExpressionOps` will use operator for feature construction.
+    To know more about  ``Operator``, please refer to `Operator API <../reference/api.html>`_.
+
+To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
 
 Filter
 -------------------
@@ -98,19 +112,6 @@ Filter
 
 To know more about ``Filter``, please refer to `Filter API <../reference/api.html>`_.
 
-Feature
-------------------
-
-``Qlib`` provides `Feature` and `ExpressionOps` to fetch the features according to users' need.
-
-- `Feature`
-    Load data from data provider.
-
-- `ExpressionOps`
-    `ExpressionOps` will use operator for feature construction.
-    To know more about  ``Operator``, please refer to `Operator API <../reference/api.html>`_.
-
-To know more about  ``Feature``, please refer to `Feature API <../reference/api.html>`_.
 
 API
 -------------

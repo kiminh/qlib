@@ -5,7 +5,9 @@ Interday Model: Model Training & Prediction
 Introduction
 ===================
 
-By ``Model``, users can use known data and features to train the model and predict the future score of the stock.
+.. TDOD:: Rewrite the part
+
+With ``Model``, users can use known data and features to train the model and make the future prediction about stocks.
 
 Interface
 ===================
@@ -163,6 +165,8 @@ Qlib provides LightGBM and DNN models as the baseline, the following example sho
     model = LGBModel(**MODEL_CONFIG)
     model.fit(x_train, y_train, x_validate, y_validate)
     _pred = model.predict(x_test)
+    pred_score = pd.DataFrame(index=_pred.index)
+    pred_score["score"] = _pred.iloc(axis=1)[0]
 
 .. note:: 'QLibDataHandlerV1' is the data handler provided by ``Qlib``, please refer to `Data Handler <data.html#data-handler>`_.
 

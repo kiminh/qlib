@@ -20,13 +20,12 @@ QLIB_DIR.mkdir(exist_ok=True, parents=True)
 
 
 class TestGetData(unittest.TestCase):
-    FIELDS = "$open,$close,$high,$low,$volume,$vwap,$factor,$change,$money".split(",")
+    FIELDS = "$open,$close,$high,$low,$volume,$factor,$change".split(",")
 
     @classmethod
     def setUpClass(cls) -> None:
-        mount_path = provider_uri = str(QLIB_DIR.resolve())
+        provider_uri = str(QLIB_DIR.resolve())
         qlib.init(
-            mount_path=mount_path,
             provider_uri=provider_uri,
             expression_cache=None,
             dataset_cache=None,
@@ -39,14 +38,14 @@ class TestGetData(unittest.TestCase):
     def test_0_qlib_data(self):
 
         GetData().qlib_data_cn(QLIB_DIR)
-        df = D.features(D.instruments("sse50"), self.FIELDS)
+        df = D.features(D.instruments("csi300"), self.FIELDS)
         self.assertListEqual(list(df.columns), self.FIELDS, "get qlib data failed")
         self.assertFalse(df.dropna().empty, "get qlib data failed")
 
     def test_1_csv_data(self):
         GetData().csv_data_cn(SOURCE_DIR)
         stock_name = set(map(lambda x: x.name[:-4].upper(), SOURCE_DIR.iterdir()))
-        self.assertEqual(len(stock_name), 300, "get csv data failed")
+        self.assertEqual(len(stock_name), 96, "get csv data failed")
 
 
 if __name__ == "__main__":

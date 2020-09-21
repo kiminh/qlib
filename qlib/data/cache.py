@@ -397,7 +397,7 @@ class ServerExpressionCache(ExpressionCache):
             self.expr_cache_path = os.path.join(C.mount_path, C.features_cache_dir_name)
         else:
             self.expr_cache_path = os.path.join(C.provider_uri, C.features_cache_dir_name)
-            os.makedirs(self.expr_cache_path, exist_ok=True)
+        os.makedirs(self.expr_cache_path, exist_ok=True)
 
     def _uri(self, instrument, field, start_time, end_time, freq):
         field = remove_fields_space(field)
@@ -583,10 +583,10 @@ class ServerDatasetCache(DatasetCache):
         self.r = get_redis_connection()
         self.remote = kwargs.get("remote", False)
         if self.remote:
-            self.dtst_cache_path = os.path.join(C.provider_uri, C.dataset_cache_dir_name)
+            self.dtst_cache_path = os.path.join(C.mount_path, C.dataset_cache_dir_name)
         else:
             self.dtst_cache_path = os.path.join(C.provider_uri, C.dataset_cache_dir_name)
-            os.makedirs(self.dtst_cache_path, exist_ok=True)
+        os.makedirs(self.dtst_cache_path, exist_ok=True)
 
     @staticmethod
     def _uri(instruments, fields, start_time, end_time, freq, disk_cache=1, **kwargs):

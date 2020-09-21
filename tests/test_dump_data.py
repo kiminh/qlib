@@ -18,17 +18,17 @@ from dump_bin import DumpData
 
 
 DATA_DIR = Path(__file__).parent.joinpath("test_data")
-DATA_DIR.mkdir(exist_ok=True, parents=True)
 SOURCE_DIR = DATA_DIR.joinpath("source")
+SOURCE_DIR.mkdir(exist_ok=True, parents=True)
 QLIB_DIR = DATA_DIR.joinpath("qlib")
 QLIB_DIR.mkdir(exist_ok=True, parents=True)
 
 
 class TestDumpData(unittest.TestCase):
-    FIELDS = "open,close,high,low,volume,vwap,factor,change,money".split(",")
+    FIELDS = "open,close,high,low,volume,factor,change".split(",")
     QLIB_FIELDS = list(map(lambda x: f"${x}", FIELDS))
-    DUMP_DATA = DumpData(csv_path=SOURCE_DIR, qlib_dir=QLIB_DIR)
-    SOTCK_NAMES = list(map(lambda x: x.name[:-4].upper(), SOURCE_DIR.iterdir()))
+    DUMP_DATA = None
+    SOTCK_NAMES = None
 
     # simpe data
     SIMPLE_DATA = None
@@ -36,9 +36,10 @@ class TestDumpData(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         GetData().csv_data_cn(SOURCE_DIR)
-        mount_path = provider_uri = str(QLIB_DIR.resolve())
+        TestDumpData.DUMP_DATA = DumpData(csv_path=SOURCE_DIR, qlib_dir=QLIB_DIR)
+        TestDumpData.SOTCK_NAMES = list(map(lambda x: x.name[:-4].upper(), SOURCE_DIR.iterdir()))
+        provider_uri = str(QLIB_DIR.resolve())
         qlib.init(
-            mount_path=mount_path,
             provider_uri=provider_uri,
             expression_cache=None,
             dataset_cache=None,
@@ -74,7 +75,7 @@ class TestDumpData(unittest.TestCase):
 
     def test_3_dump_features_simple(self):
         stock = self.SOTCK_NAMES[0]
-        dump_data = DumpData(csv_path=SOURCE_DIR.joinpath(f"{stock.upper()}.csv"), qlib_dir=QLIB_DIR)
+        dump_data = DumpData(csv_path=SOURCE_DIR.joinpath(f"{stock.lower()}.csv"), qlib_dir=QLIB_DIR)
         dump_data.dump_features(include_fields=self.FIELDS, calendar_path=QLIB_DIR.joinpath("calendars", "day.txt"))
 
         df = D.features([stock], self.QLIB_FIELDS)

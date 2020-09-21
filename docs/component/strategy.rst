@@ -7,7 +7,9 @@ Interday Strategy: Portfolio Management
 Introduction
 ===================
 
-By ``Strategy``, users can adopt different trading strategies, which means that users can use different algorithms to generate investment portfolios based on the predicted scores of the ``Model`` module.
+.. TDOD:: Rewrite the part
+
+With ``Strategy``, users can adopt different trading strategies, which means that users can use different algorithms to generate investment portfolios based on the predicted scores of the ``Model`` module.
 
 ``Qlib`` provides several trading strategy classes, users can customize strategies according to their own needs also.
 
@@ -66,11 +68,11 @@ The implemented interface `generate_target_weight_position` adopts the ``Topk-Ma
     ``Topk-Margin`` algorithm: 
 
     - `Topk`: The number of stocks held
-    - `margin`: Score rank threshold
+    - `margin`: Rank threshold of prediction score 
     
 
     Currently, the number of held stocks is `Topk`.
-    On each trading day, the held stocks with scores outside the threshold `margin` will be sold, and the same number of unheld stocks with best scores will be bought. 
+    On each trading day, the held stocks with the rank of prediction score outside the threshold `margin` will be sold, and the same number of unheld stocks with best prediction score will be bought. 
 
     .. image:: ../_static/img/topk_margin.png
         :alt: Topk-Margin
@@ -100,7 +102,7 @@ TopkDropoutStrategy
         - `Drop`: The number of stocks sold on each trading day
         
         Currently, the number of held stocks is `Topk`.
-        On each trading day, the `Drop` number of held stocks with worst scores will be sold, and the same number of unheld stocks with best scores will be bought.
+        On each trading day, the `Drop` number of held stocks with worst prediction score will be sold, and the same number of unheld stocks with best prediction score will be bought.
         
         .. image:: ../_static/img/topk_drop.png
             :alt: Topk-Drop
@@ -132,13 +134,17 @@ Example
     # use default strategy
     # custom Strategy, refer to: TODO: Strategy API url
     strategy = TopkAmountStrategy(**STRATEGY_CONFIG)
+
+    # pred_score is the prediction score output by Model
     report_normal, positions_normal = backtest(
         pred_score, strategy=strategy, **BACKTEST_CONFIG
     )
 
 Also, the above example has been given in ``examples.estimator.train_backtest_analyze.ipynb``.
 
-To know more about ``Backtest``, please refer to `Backtest: Model&Strategy Testing <backtest.html>`_.
+To know more about the prediction score `pred_score` output by ``Model``, please refer to `Interday Model: Model Training & Prediction <model.html>`_.
+
+To know more about ``Backtest``, please refer to `Intraday Trading: Model&Strategy Testing <backtest.html>`_.
 
 API
 ===================

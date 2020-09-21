@@ -25,6 +25,12 @@ python collector.py download_data --source_dir ~/.qlib/stock_data/source
 python collector.py normalize_data --source_dir ~/.qlib/stock_data/source --normalize_dir ~/.qlib/stock_data/normalize
 ```
 
+### Manual Ajust Yahoo Finance Data
+
+```bash
+python collector.py manual_adj_data --normalize_dir ~/.qlib/stock_data/normalize
+```
+
 ### Dump Yahoo Finance Data
 
 ```bash

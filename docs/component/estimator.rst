@@ -6,7 +6,9 @@ Estimator: Workflow Management
 
 Introduction
 ===================
-The components in :ref:`framework` is designed in a loosely-coupled way. User could build his own Quant research workflow with these components like `Example <http://TODO_URL>`_
+
+The components in :ref:`framework` is designed in a loosely-coupled way. User could build their own Quant research workflow with these components like `Example <http://TODO_URL>`_
+
 
 Besides, ``Qlib`` provides more user-friendly interfaces named ``Estimator`` to automatically run the whole workflow defined by a config.  A concrete execution of the whole workflow is called an experiment.
 With ``Estimator``, user can easily run an ``experiment``, which includes the following steps:
@@ -53,7 +55,7 @@ First, Write a simple configuration file as following,
         num_leaves: 210
         num_threads: 20
     data:
-      class: QLibDataHandlerV1
+      class: QLibDataHandlerClose
       args:
         dropna_label: True
       filter:
@@ -79,15 +81,13 @@ First, Write a simple configuration file as following,
         limit_threshold: 0.095
         account: 100000000
         benchmark: SH000905
-        deal_price: vwap
+        deal_price: close
         open_cost: 0.0005
         close_cost: 0.0015
         min_cost: 5
-      long_short_backtest_args:
-        topk: 50
     qlib_data:
       # when testing, please modify the following parameters according to the specific environment
-      mount_path: "~/.qlib/qlib_data/cn_data"
+      provider_uri: "~/.qlib/qlib_data/cn_data"
       region: "cn"
 
 
@@ -286,7 +286,7 @@ Users can use the specified data handler by config as follows.
 .. code-block:: YAML
 
     data:
-        class: QLibDataHandlerV1
+        class: QLibDataHandlerClose
         args:
             start_date: 2005-01-01
             end_date: 2018-04-30  
@@ -368,7 +368,6 @@ Qlib support custom data handler, but it must be a subclass of the ``qlib.contri
         args:
             start_date: 2005-01-01
             end_date: 2018-04-30  
-            feature_label_config: /data/qlib/feature_config/feature_config.yaml
 
 The class `SomeDataHandler` should be in the module `custom_data_handler`, and ``Qlib`` could parse the `module_path` to load the class.
 
@@ -400,12 +399,12 @@ Qlib have provided two implemented trainer,
     The rolling trainer will use the rolling iterator of the data processor to split data for rolling training.
 
 
-Users can specify `trainer` through the configuration file:
+Users can specify `trainer` with the configuration file:
 
 .. code-block:: YAML
 
     trainer:
-        class: StaticTrainer // or RollingTrainer
+        class: StaticTrainer # or RollingTrainer
         args:
             rolling_period: 360
             train_start_date: 2005-01-01
@@ -416,7 +415,7 @@ Users can specify `trainer` through the configuration file:
             test_end_date: 2017-07-31
 
 - `class`   
-    Trainer class, trt should be a subclass of `qlib.contrib.estimator.trainer.BaseTrainer`, and need to implement three important interfaces, the default value is `StaticTrainer`.
+    Trainer class, which should be a subclass of `qlib.contrib.estimator.trainer.BaseTrainer`, and needs to implement three important interfaces, the default value is `StaticTrainer`.
 
 - `module_path`    
     The module path, str type, absolute url is also supported, indicates the path of the trainer class implementation.
@@ -522,7 +521,7 @@ Users can specify `backtest` through a config file, for example:
             topk: 50
             benchmark: SH000905
             account: 500000
-            deal_price: vwap
+            deal_price: close
             min_cost: 5
             subscribe_fields:
               - $close
@@ -566,10 +565,10 @@ The `qlib_data` field describes the parameters of qlib initialization.
 
     qlib_data:
       # when testing, please modify the following parameters according to the specific environment
-      mount_path: "~/.qlib/qlib_data/cn_data"
+      provider_uri: "~/.qlib/qlib_data/cn_data"
       region: "cn"
     
-- `mount_path`
+- `provider_uri`
     The local directory where the data loaded by 'get_data.py' is stored.
 - `region`
     - If region == ``qlib.config.REG_CN``, 'qlib' will be initialized in US-stock mode. 
@@ -614,7 +613,7 @@ Users can check the experiment results from file storage directly, or check the 
     
     .. note::
         Currently supported fields:
-            ['model', 'analysis', 'positions', 'report_normal', 'report_long', 'report_short', 'report_long_short', 'pred', 'task_config', 'label']
+            ['model', 'analysis', 'positions', 'report_normal', 'pred', 'task_config', 'label']
 
     .. code-block:: JSON
 
@@ -623,7 +622,6 @@ Users can check the experiment results from file storage directly, or check the 
             'pred': pred_df,
             'positions': positions_dic,
             'report_normal': report_normal_df,
-            'report_long_short': report_long_short_df
         }
 
 
@@ -655,17 +653,17 @@ Here is a simple example of `FileFetcher`, which could fetch files from `file_st
 
     >>> print(f.get_experiment('test_experiment', '1'))
 
-                            risk
-    sub_bench       mean    0.000953
-                    std     0.004688
-                    annual  0.240123
-                    ir      3.226878
-                    mdd    -0.064588
-    sub_cost        mean    0.000718
-                    std     0.004694
-                    annual  0.181003
-                    ir      2.428964
-                    mdd    -0.072977
+                          risk
+    sub_bench mean    0.000662
+              std     0.004487
+              annual  0.166720
+              sharpe  2.340526
+              mdd    -0.080516
+    sub_cost  mean    0.000577
+              std     0.004482
+              annual  0.145392
+              sharpe  2.043494
+              mdd    -0.083584
 
 If users use mongo observer when training, they should initialize their fether with mongo_url
 
